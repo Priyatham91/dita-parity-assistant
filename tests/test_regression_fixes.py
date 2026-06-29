@@ -18,11 +18,11 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from app.article_html_parser import parse_help_center_html, expand_blocks_for_diff
-from app.diff_engine import diff, OpKind
-from app.map_parser import parse_ditamap_entries
-from app.patch_engine import apply_ops, ResultCategory
-from app.publication_reconstructor import reconstruct
+from app.article_html_parser import parse_help_center_html, expand_blocks_for_diff  # noqa: E402
+from app.diff_engine import diff, OpKind  # noqa: E402
+from app.map_parser import parse_ditamap_entries  # noqa: E402
+from app.patch_engine import apply_ops, ResultCategory  # noqa: E402
+from app.publication_reconstructor import reconstruct  # noqa: E402
 
 
 def _run(fixture_run_id: str, ditamap_name: str):
@@ -224,7 +224,6 @@ class ReplaceDropsMarkupWhenArticleDoesNotMatch(unittest.TestCase):
 
     def test_paragraph_with_xref_reworded_drops_xref(self) -> None:
         import tempfile
-        import xml.etree.ElementTree as ET
         from app.article_html_parser import HtmlArticleBlock
         from app.diff_engine import diff
         from app.patch_engine import apply_ops
@@ -361,7 +360,6 @@ class SuppressNoiseWhenArticleIsSubstring(unittest.TestCase):
 
     def test_substring_replace_is_silently_dropped(self) -> None:
         import tempfile
-        import xml.etree.ElementTree as ET
         from app.article_html_parser import HtmlArticleBlock
         from app.diff_engine import diff
         from app.patch_engine import apply_ops
@@ -513,7 +511,6 @@ class InsertInsideDlBecomesDlentry(unittest.TestCase):
 
     def test_dl_anchor_produces_dlentry(self) -> None:
         import tempfile
-        import xml.etree.ElementTree as ET
         from app.article_html_parser import HtmlArticleBlock
         from app.diff_engine import diff
         from app.patch_engine import apply_ops
@@ -664,7 +661,6 @@ class FreshDlBuiltFromTermDescBullets(unittest.TestCase):
 
     def test_three_term_desc_bullets_become_dl(self) -> None:
         import tempfile
-        import xml.etree.ElementTree as ET
         from app.article_html_parser import HtmlArticleBlock
         from app.diff_engine import diff
         from app.patch_engine import apply_ops
@@ -702,7 +698,7 @@ class FreshDlBuiltFromTermDescBullets(unittest.TestCase):
             ]
             ops = diff(pub, [b.text for b in article_blocks], article_blocks=article_blocks)
             out_dir = tmp_path / "out"
-            report = apply_ops(
+            apply_ops(
                 ops, out_dir, article_blocks=article_blocks, publication=pub,
             )
 
@@ -754,7 +750,7 @@ class FreshDlBuiltFromTermDescBullets(unittest.TestCase):
             ]
             ops = diff(pub, [b.text for b in article_blocks], article_blocks=article_blocks)
             out_dir = tmp_path / "out"
-            report = apply_ops(
+            apply_ops(
                 ops, out_dir, article_blocks=article_blocks, publication=pub,
             )
             patched = (out_dir / "topic.dita").read_text(encoding="utf-8")
@@ -803,7 +799,7 @@ class TaskHeadingUsesStepsection(unittest.TestCase):
             ]
             ops = diff(pub, [b.text for b in article_blocks], article_blocks=article_blocks)
             out_dir = tmp_path / "out"
-            report = apply_ops(
+            apply_ops(
                 ops, out_dir, article_blocks=article_blocks, publication=pub,
             )
             patched = (out_dir / "topic.dita").read_text(encoding="utf-8")
@@ -861,7 +857,7 @@ class NewTableFollowsIM(unittest.TestCase):
             ]
             ops = diff(pub, [b.text for b in article_blocks], article_blocks=article_blocks)
             out_dir = tmp_path / "out"
-            report = apply_ops(
+            apply_ops(
                 ops, out_dir, article_blocks=article_blocks, publication=pub,
             )
             patched = (out_dir / "topic.dita").read_text(encoding="utf-8")
@@ -927,7 +923,7 @@ class FreshDlInTaskTopicGoesInStepInfo(unittest.TestCase):
             ]
             ops = diff(pub, [b.text for b in article_blocks], article_blocks=article_blocks)
             out_dir = tmp_path / "out"
-            report = apply_ops(
+            apply_ops(
                 ops, out_dir, article_blocks=article_blocks, publication=pub,
             )
 
@@ -974,8 +970,10 @@ class SectionAwareDiffPicksRightTab(unittest.TestCase):
         out = PROJECT_ROOT / "output" / "tests" / "section_aware_test"
         if out.exists():
             for f in out.glob("*"):
-                try: f.unlink()
-                except OSError: pass
+                try:
+                    f.unlink()
+                except OSError:
+                    pass
         out.mkdir(parents=True, exist_ok=True)
         report = apply_ops(ops, out, article_blocks=origins, publication=publication)
 
@@ -1104,7 +1102,6 @@ class LowOverlapReplaceIsDemoted(unittest.TestCase):
         import tempfile
         from app.article_html_parser import HtmlArticleBlock
         from app.diff_engine import diff
-        from app.patch_engine import apply_ops
         from app.publication_reconstructor import Publication, Block
 
         dita_src = (
@@ -1228,7 +1225,7 @@ class LiWithMixedContentEmitsLeadingText(unittest.TestCase):
 
     def test_li_with_note_emits_leading_text_block(self) -> None:
         import tempfile
-        from app.publication_reconstructor import reconstruct, Publication
+        from app.publication_reconstructor import reconstruct
         from app.publication_reconstructor import Block  # noqa: F401
 
         dita_src = (
@@ -1730,7 +1727,6 @@ class IconInUicontrolIgnoredForMediaAdvisory(unittest.TestCase):
 
     def test_uicontrol_icon_does_not_trigger_media_advisory(self) -> None:
         import xml.etree.ElementTree as ET
-        from io import StringIO
         from app.patch_engine import _has_media_anywhere
 
         # Icon nested in <uicontrol> — should be ignored.
@@ -1839,7 +1835,6 @@ class MediaAdvisoryIsPerTopic(unittest.TestCase):
 
     def test_one_advisory_per_topic_with_topic_id(self) -> None:
         import tempfile
-        import xml.etree.ElementTree as ET
         from app.patch_engine import (
             PatchReport, _surface_media_for_verification, ResultCategory,
         )
@@ -2323,7 +2318,7 @@ class DeleteSafetyNetIsStrict(unittest.TestCase):
         if not inputs.exists():
             self.skipTest("fixture not present in this checkout")
         from app.article_html_parser import parse_help_center_html, expand_blocks_for_diff
-        from app.diff_engine import diff as _diff, OpKind as _OpKind
+        from app.diff_engine import diff as _diff
         from app.map_parser import parse_ditamap_entries
         from app.publication_reconstructor import reconstruct
         from app.patch_engine import apply_ops
@@ -3895,7 +3890,7 @@ class InsertStepIntoTaskbodyRoutesToSteps(unittest.TestCase):
             ]
             ops = diff(pub, [b.text for b in article], article_blocks=article)
             out = Path(tmp) / "out"
-            report = apply_ops(ops, out, article_blocks=article, publication=pub)
+            apply_ops(ops, out, article_blocks=article, publication=pub)
             patched = (out / "topic.dita").read_text(encoding="utf-8")
             # CRITICAL: <ol> must NOT be a child of <taskbody>.
             taskbody_ol = "<taskbody><ol" in patched.replace(" ", "")
@@ -4540,7 +4535,7 @@ class InsertIntoPrereq(unittest.TestCase):
             ]
             ops = diff(pub, [b.text for b in article], article_blocks=article)
             out = Path(tmp) / "out"
-            report = apply_ops(
+            apply_ops(
                 ops, out, article_blocks=article, publication=pub,
             )
             patched = (out / "topic.dita").read_text(encoding="utf-8")
@@ -4610,7 +4605,7 @@ class EmphasisFallbackWrapsInEm(unittest.TestCase):
             ]
             ops = diff(pub, [b.text for b in article], article_blocks=article)
             out = Path(tmp) / "out"
-            report = apply_ops(
+            apply_ops(
                 ops, out, article_blocks=article, publication=pub,
             )
             patched = (out / "topic.dita").read_text(encoding="utf-8")
@@ -4635,7 +4630,6 @@ class SectionAwareDeleteSafetyAndDemote(unittest.TestCase):
         import tempfile
         from app.article_html_parser import HtmlArticleBlock
         from app.diff_engine import diff
-        from app.map_parser import TopicRef
         from app.patch_engine import apply_ops
         from app.publication_reconstructor import reconstruct
 
@@ -4698,7 +4692,7 @@ class SectionAwareDeleteSafetyAndDemote(unittest.TestCase):
             ]
             ops = diff(pub, [b.text for b in article], article_blocks=article)
             out = Path(tmp) / "out"
-            report = apply_ops(
+            apply_ops(
                 ops, out, article_blocks=article, publication=pub,
             )
             desktop = (out / "Desktop.dita").read_text(encoding="utf-8")
@@ -4818,7 +4812,7 @@ class InsertAnchorSurvivesDeletes(unittest.TestCase):
             ]
             ops = diff(pub, [b.text for b in article], article_blocks=article)
             out = Path(tmp) / "out"
-            report = apply_ops(
+            apply_ops(
                 ops, out, article_blocks=article, publication=pub,
             )
             patched = (out / "topic.dita").read_text(encoding="utf-8")
@@ -5022,9 +5016,7 @@ class FeatureNotesRefusedNotModified(unittest.TestCase):
         The "review manually" flag only fires when the launcher is
         still present and the writer must update it by hand."""
         import tempfile
-        from app.diff_engine import DiffOp, OpKind
         from app.patch_engine import (
-            ResultCategory,
             _article_has_feature_launcher,
             _is_source_feature_note,
         )
@@ -5117,7 +5109,6 @@ class FeatureNotesRefusedNotModified(unittest.TestCase):
     def test_article_feature_launcher_insert_is_refused(self) -> None:
         """An article-side feature-launcher block is never INSERTed
         into the topic. The writer is told to add it by hand."""
-        from app.diff_engine import DiffOp, OpKind
         from app.patch_engine import _is_article_feature_launcher
 
         class FakeArticleBlock:
@@ -5178,7 +5169,6 @@ class TrailingPunctuationEqualPairsInLCS(unittest.TestCase):
         from app.article_html_parser import HtmlArticleBlock
         from app.diff_engine import diff
         from app.map_parser import TopicRef
-        from app.patch_engine import apply_ops
         from app.publication_reconstructor import reconstruct
 
         with tempfile.TemporaryDirectory() as tmp:

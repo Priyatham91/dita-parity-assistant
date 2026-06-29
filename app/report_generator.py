@@ -115,7 +115,7 @@ def _write_entry(lines: List[str], i: int, r: PatchResult, header: str) -> None:
     if op is None:
         # Run-level advisory (e.g. "verify embedded media"). No diff op
         # to describe — just the reason explains the action.
-        lines.append(f"  operation:   ADVISORY")
+        lines.append("  operation:   ADVISORY")
     else:
         lines.append(f"  operation:   {op.kind.value.upper()}")
         if op.kind == OpKind.INSERT:
@@ -123,7 +123,7 @@ def _write_entry(lines: List[str], i: int, r: PatchResult, header: str) -> None:
             if anchor is not None:
                 lines.append(f"  anchor:      after {anchor.topic_id}::{anchor.element_xpath}")
             else:
-                lines.append(f"  anchor:      <publication start>")
+                lines.append("  anchor:      <publication start>")
             lines.append(f"  new text:    {op.updated_text!r}")
         else:
             block = op.source_block
@@ -138,7 +138,7 @@ def _write_entry(lines: List[str], i: int, r: PatchResult, header: str) -> None:
     if r.warning:
         lines.append(f"  warning:     {r.warning}")
     if r.code_snippet:
-        lines.append(f"  snippet:")
+        lines.append("  snippet:")
         for snippet_line in r.code_snippet.splitlines():
             lines.append(f"    {snippet_line}")
     lines.append("")

@@ -36,14 +36,14 @@ from typing import List, Optional
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from app.article_html_parser import expand_blocks_for_diff, parse_help_center_html
-from app.diff_engine import diff, split_updated_article, summarize
-from app.html_report import write_html_report
-from app.map_parser import TopicRef, parse_ditamap_entries, parse_reltable_entries
-from app.patch_engine import apply_ops
-from app.publication_reconstructor import reconstruct
-from app.report_generator import write_patch_report
-from app.schematron_validator import validate_files
+from app.article_html_parser import expand_blocks_for_diff, parse_help_center_html  # noqa: E402
+from app.diff_engine import diff, split_updated_article, summarize  # noqa: E402
+from app.html_report import write_html_report  # noqa: E402
+from app.map_parser import TopicRef, parse_ditamap_entries, parse_reltable_entries  # noqa: E402
+from app.patch_engine import apply_ops  # noqa: E402
+from app.publication_reconstructor import reconstruct  # noqa: E402
+from app.report_generator import write_patch_report  # noqa: E402
+from app.schematron_validator import validate_files  # noqa: E402
 
 
 RUNS_DIR = PROJECT_ROOT / "output" / "runs"
@@ -240,7 +240,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
         try:
             uploads = _parse_multipart(content_type, body)
-        except Exception as exc:  # noqa: BLE001
+        except Exception:  # noqa: BLE001
             self._serve_error("Failed to parse upload.", traceback.format_exc())
             return
 

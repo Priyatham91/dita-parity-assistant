@@ -15,8 +15,11 @@ def main() -> int:
          "smart vs ASCII single quote"),
         ('the "Save" button', "the “Save” button", True,
          "smart vs ASCII double quotes"),
-        ("Not Reversible When you delete", "Not Reversible – When you delete", False,
-         "different content (en-dash + missing word)"),
+        # A spaced en-dash is treated as a separator (see _DL_SEPARATOR_RE) and
+        # folds away, so these differ only by punctuation and match. No words
+        # are added or removed, so this is intentionally not flagged.
+        ("Not Reversible When you delete", "Not Reversible – When you delete", True,
+         "spaced en-dash separator folds away"),
         ("a - b", "a — b", True,
          "hyphen and em-dash with spacing — both fold to 'a - b'"),
         ("a - b", "a - b", True,

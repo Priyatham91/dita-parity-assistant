@@ -18,7 +18,7 @@ mapping is in `_CONTAINER_SELECTORS` and `_CALLOUT_KIND_RE`.
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from html.parser import HTMLParser
 from typing import List, Optional
 

@@ -37,11 +37,13 @@ jobs:
       - name: Run the regression test suite
         run: python -m unittest discover -s tests -p "test_regression_fixes.py" -v
 
-      - name: Run the HTML parser smoke tests
-        run: python -m unittest discover -s tests -p "test_html_parser_smoke.py" -v
-
+      # These suites are standalone scripts (each prints a pass count and
+      # exits non-zero on failure), so run them directly rather than via
+      # unittest discovery, which would collect 0 tests and error out.
+      # (The HTML parser smoke test is a manual dev tool: it needs a sample
+      # page fetched to a local path first, so it is not run in CI.)
       - name: Run the typography tests
-        run: python -m unittest discover -s tests -p "test_normalize_typography.py" -v
+        run: python tests/test_normalize_typography.py
 
       - name: Run the note-prefix tests
-        run: python -m unittest discover -s tests -p "test_note_prefix.py" -v
+        run: python tests/test_note_prefix.py

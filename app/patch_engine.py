@@ -1988,7 +1988,6 @@ def apply_ops(
                 # from the new text. Each \\n\\n separates paragraphs;
                 # we never insert as a bare-text <note>.
                 if _local(element.tag) == "note":
-                    note_kind = element.get("type")
                     new_text = op.updated_text or ""
                     note_bullets = (
                         getattr(article_block, "note_bullets", None)
@@ -2036,7 +2035,6 @@ def apply_ops(
                                     del element.attrib["othertype"]
                                 for k, v in new_attrs.items():
                                     element.set(k, v)
-                                note_kind = new_attrs.get("type")
                     source_has_bullets = any(
                         _local(c.tag) in ("ul", "ol")
                         for c in element.iter()
@@ -3798,13 +3796,11 @@ def _populate_entry_with_em_wraps(entry, text: str, em_phrases: List[str]) -> No
     # Walk through text, dropping plain runs as entry.text / em.tail and
     # creating <em> elements for each wrap span.
     entry.text = text[:spans[0][0]] or None
-    last_em = None
     for i, (start, end, phrase) in enumerate(spans):
         em_el = ET.SubElement(entry, "em")
         em_el.text = phrase
         next_start = spans[i + 1][0] if i + 1 < len(spans) else len(text)
         em_el.tail = text[end:next_start] or None
-        last_em = em_el
     # If the last em's tail is empty, leave it None — ET handles it.
 
 
