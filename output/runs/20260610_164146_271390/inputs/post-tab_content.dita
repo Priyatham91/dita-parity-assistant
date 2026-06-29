@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//LINKEDIN//DTD DITA Concept//EN" "linkedin_concept.dtd">
+<concept id="ID-0000009f" xml:lang="en-US"><title/><prolog><critdates><revised modified="" expiry=""/></critdates><permissions view=""/><change-historylist><change-item><change-organization/><change-request-reference><change-request-id/></change-request-reference><change-completed/><change-summary/></change-item></change-historylist><metadata><audience type="" job="" name="NAME"/><contentType>HC</contentType><helpCenter>LinkedIn HC</helpCenter><userJourney/><systemUsage/><billing/><informational/><integrations/><hc_tasks/><hcDeliveryChannel>Help Center</hcDeliveryChannel><trust/><keywords><keyword/></keywords><prodinfo><prodname/><LoB/><feature>Feed, Post</feature><platform/><subscriptionLevel/><internalKeyword/></prodinfo></metadata></prolog><conbody><p>You can sort comments by 
+            <uicontrol>Most relevant</uicontrol>
+          or 
+            <uicontrol>Most recent</uicontrol>
+          comments. Click or tap on the 
+            <uicontrol>Most relevant</uicontrol>
+          dropdown below a comment textbox and select an option. Some comments will only be visible under 
+            <uicontrol>Most recent</uicontrol>
+          view.</p></conbody></concept>

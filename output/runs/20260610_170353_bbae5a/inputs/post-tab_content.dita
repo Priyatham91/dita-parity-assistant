@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//LINKEDIN//DTD DITA Concept//EN" "linkedin_concept.dtd">
+<concept id="ID-00000078" xml:lang="en-US"><title/><prolog><critdates><revised modified="" expiry=""/></critdates><permissions view=""/><change-historylist><change-item><change-organization/><change-request-reference><change-request-id/></change-request-reference><change-completed/><change-summary/></change-item></change-historylist><metadata><audience type="" job="" name="NAME"/><contentType>HC</contentType><helpCenter>Recruiter HC, LinkedIn HC, Marketing Solutions HC</helpCenter><userJourney/><systemUsage/><billing/><informational/><integrations/><hc_tasks>Edit pages</hc_tasks><hcDeliveryChannel>Help Center</hcDeliveryChannel><trust/><keywords><keyword/></keywords><prodinfo><prodname>Pages</prodname><LoB/><feature/><platform/><subscriptionLevel/><internalKeyword/></prodinfo></metadata></prolog><conbody><note type="important"><p>If you don't have a Premium Company Page subscription, the call-to-action option is only
+            visible when members click the <uicontrol><image
+                  href="/content/dam/global-design-files/product-ui-icons/ellipsis-horizontal-icon.svg"
+               /> More</uicontrol> button.</p></note></conbody></concept>

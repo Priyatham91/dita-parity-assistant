@@ -1,0 +1,184 @@
+========================================================================
+DITA PARITY PATCH REPORT
+========================================================================
+Total ops processed:    20
+Applied:                7
+Skipped (safety):       7
+Detected (manual):      5
+Map edits (reltable):   1
+Applied with warnings:  0
+Files written:          1
+  - C:\Users\parukala\Dita Parity AI\migration_assistant\output\runs\20260610_164146_271390\outputs\Notes.dita
+
+------------------------------------------------------------------------
+APPLIED  (auto-patched into output/)
+------------------------------------------------------------------------
+[APPLIED #1]
+  operation:   DELETE
+  topic file:  Notes.dita
+  xpath:       /concept/conbody[1]/ul[1]/li[6]
+  old text:    "To keep LinkedIn safe and professional, we may limit how\n                                                many comments a member or a LinkedIn Page can make\n                                                in a certain time period. Similarly, if we detect\n                                                excessive comment creation or use of an automation\n                                                tool, we may limit the visibility of those comments.\n                                                Verifying your Page, and ensuring that you and the\n                                                other admins of your Page have added a workplace or\n                                                identity verification to your member accounts can\n                                                help you optimize your Page's content creation and\n                                                visibility."
+
+[APPLIED #2]
+  operation:   DELETE
+  topic file:  Notes.dita
+  xpath:       /concept/conbody[1]/ul[1]/li[5]
+  old text:    'When a member or a LinkedIn Page comments on their own post,\n                                                an Author tag is displayed next to the\n                                                name.'
+
+[APPLIED #3]
+  operation:   DELETE
+  topic file:  Notes.dita
+  xpath:       /concept/conbody[1]/ul[1]/li[4]
+  old text:    'Members can block members and LinkedIn Pages from commenting\n                                                on their posts.'
+
+[APPLIED #4]
+  operation:   DELETE
+  topic file:  Notes.dita
+  xpath:       /concept/conbody[1]/ul[1]/li[3]
+  old text:    'LinkedIn Pages can allow or restrict comments on their Page\n                                                posts from all LinkedIn members.'
+
+[APPLIED #5]
+  operation:   DELETE
+  topic file:  Notes.dita
+  xpath:       /concept/conbody[1]/ul[1]/li[2]
+  old text:    "Members can limit commenting on their posts to connections\n                                                only. This will prevent you from commenting if you\n                                                aren't their 1st-degree connection."
+
+[APPLIED #6]
+  operation:   DELETE
+  topic file:  Notes.dita
+  xpath:       /concept/conbody[1]/ul[1]/li[1]
+  old text:    'Members and LinkedIn Pages can disable comments on their\n                                                posts. This will prevent you from commenting.'
+
+[APPLIED #7]
+  operation:   DELETE
+  topic file:  Notes.dita
+  xpath:       /concept/title[1]
+  old text:    'Notes:'
+
+------------------------------------------------------------------------
+SKIPPED  (auto-patch refused for safety / structural reasons)
+------------------------------------------------------------------------
+[SKIPPED #1]
+  operation:   INSERT
+  anchor:      after <ditamap>::<topichead navtitle='Desktop'>
+  new text:    'Mobile'
+  reason:      this heading lives in the .ditamap (<topichead>/<topicgroup>/<navtitle>), not in a topic body; edit the map directly
+
+[SKIPPED #2]
+  operation:   REPLACE
+  topic file:  Desktop.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]
+  old text:    'Click the Emoji icon to add an emoji or click the\n                           \n                        Photo icon to attach a photo.'
+  new text:    'Optional: Type @ to mention someone in your comment. Click the Emoji icon to add an emoji, the icon to select a GIF, or the Image icon to attach a photo.'
+  reason:      structural element <note> with nested paragraphs/lists — the article's callout collapses these into one block; not safe to split a single edit back across child <p> elements
+
+[SKIPPED #3]
+  operation:   REPLACE
+  topic file:  To_reply_to_a_comment.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]
+  old text:    'Click the  Emoji icon to add an emoji or click the  \n                        Photo icon to attach a photo.'
+  new text:    'Optional: Type @ to mention someone in your comment. Click the Emoji icon to add an emoji, the icon to select a GIF, or the Image icon to attach a photo.'
+  reason:      structural element <note> with nested paragraphs/lists — the article's callout collapses these into one block; not safe to split a single edit back across child <p> elements
+
+[SKIPPED #4]
+  operation:   DELETE
+  topic file:  <ditamap>
+  xpath:       <topichead navtitle='Mobile'>
+  old text:    'Mobile'
+  reason:      this heading lives in the .ditamap (<topichead>/<topicgroup>/<navtitle>), not in a topic body; edit the map directly
+
+[SKIPPED #5]
+  operation:   REPLACE
+  topic file:  Mobile.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]
+  old text:    'Tap @ to mention someone in your comment or tap the   Camera icon to add a photo.'
+  new text:    'Optional: Tap @ to mention someone in your comment, tap the icon to select a Gif, or tap the Image icon to add a photo.'
+  reason:      structural element <note> with nested paragraphs/lists — the article's callout collapses these into one block; not safe to split a single edit back across child <p> elements
+
+[SKIPPED #6]
+  operation:   REPLACE
+  topic file:  To_reply_to_a_comment1.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]
+  old text:    'Tap @ to mention someone in your reply or tap the   Camera icon to add a photo.'
+  new text:    'Optional: Tap @ to mention someone in your comment, tap the icon to select a Gif, or tap the Image icon to add a photo.'
+  reason:      structural element <note> with nested paragraphs/lists — the article's callout collapses these into one block; not safe to split a single edit back across child <p> elements
+
+[SKIPPED #7]
+  operation:   REPLACE
+  topic file:  Mobile.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[3]/cmd[1]
+  old text:    'Tap Comment.'
+  new text:    'Tap Reply.'
+  reason:      source element contains inline markup (<xref>/<uicontrol>/<keyword> etc.) that the article's plain-text update would discard; review manually to decide what to keep
+
+------------------------------------------------------------------------
+DETECTED  (change found but op kind not yet auto-applied)
+------------------------------------------------------------------------
+[DETECTED #1]
+  operation:   REPLACE
+  topic file:  Desktop.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]
+  old text:    'Click the Emoji icon to add an emoji or click the\n                           \n                        Photo icon to attach a photo.'
+  new text:    'Optional: Type @ to mention someone in your comment. Click the Emoji icon to add an emoji, the icon to select a GIF, or the Image icon to attach a photo.'
+  reason:      the original REPLACE was refused for safety reasons (see the SKIPPED entry above); the new article text is surfaced here so it isn't lost — place it manually near Desktop.dita::/task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]
+
+[DETECTED #2]
+  operation:   REPLACE
+  topic file:  To_reply_to_a_comment.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]
+  old text:    'Click the  Emoji icon to add an emoji or click the  \n                        Photo icon to attach a photo.'
+  new text:    'Optional: Type @ to mention someone in your comment. Click the Emoji icon to add an emoji, the icon to select a GIF, or the Image icon to attach a photo.'
+  reason:      the original REPLACE was refused for safety reasons (see the SKIPPED entry above); the new article text is surfaced here so it isn't lost — place it manually near To_reply_to_a_comment.dita::/task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]
+
+[DETECTED #3]
+  operation:   REPLACE
+  topic file:  Mobile.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]
+  old text:    'Tap @ to mention someone in your comment or tap the   Camera icon to add a photo.'
+  new text:    'Optional: Tap @ to mention someone in your comment, tap the icon to select a Gif, or tap the Image icon to add a photo.'
+  reason:      the original REPLACE was refused for safety reasons (see the SKIPPED entry above); the new article text is surfaced here so it isn't lost — place it manually near Mobile.dita::/task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]
+
+[DETECTED #4]
+  operation:   REPLACE
+  topic file:  To_reply_to_a_comment1.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]
+  old text:    'Tap @ to mention someone in your reply or tap the   Camera icon to add a photo.'
+  new text:    'Optional: Tap @ to mention someone in your comment, tap the icon to select a Gif, or tap the Image icon to add a photo.'
+  reason:      the original REPLACE was refused for safety reasons (see the SKIPPED entry above); the new article text is surfaced here so it isn't lost — place it manually near To_reply_to_a_comment1.dita::/task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]
+
+[DETECTED #5]
+  operation:   REPLACE
+  topic file:  Mobile.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[3]/cmd[1]
+  old text:    'Tap Comment.'
+  new text:    'Tap Reply.'
+  reason:      the original REPLACE was refused for safety reasons (see the SKIPPED entry above); the new article text is surfaced here so it isn't lost — place it manually near Mobile.dita::/task/taskbody[1]/steps[1]/step[3]/cmd[1]
+
+------------------------------------------------------------------------
+MAP EDITS  (content belongs in the .ditamap reltable, not topic bodies)
+------------------------------------------------------------------------
+[MAP EDIT #1]
+  operation:   INSERT
+  anchor:      after post-tab_content.dita::/concept/conbody[1]/p[1]
+  new text:    'Related tasks'
+  reason:      Review the <reltable> in your .ditamap. The article has a Learn more / Related tasks section; make sure the corresponding <relcell> entries match.
+
+------------------------------------------------------------------------
+SCHEMATRON VALIDATION
+------------------------------------------------------------------------
+Ran against kms_global_rules.sch: 2 issues (1 error, 1 warning, 0 info)
+
+[VALIDATION #1]
+  rule:        IM_list01
+  severity:    WARNING
+  topic file:  Notes.dita
+  location:    /concept/conbody/ul
+  message:     IM_list01: Do not include a single item list.
+
+[VALIDATION #2]
+  rule:        IM_shortdesc02
+  severity:    ERROR
+  topic file:  Notes.dita
+  location:    /concept
+  message:     IM_shortdesc02: A short description is strongly recommended.
+

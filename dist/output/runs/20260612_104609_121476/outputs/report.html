@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DITA Parity Report — Premium_partner_benefits_FAQ.ditamap</title>
+<style>
+  :root {
+    --bg: #f7f7f8;
+    --surface: #ffffff;
+    --text: #1f2328;
+    --muted: #6e7681;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --applied: #1a7f37;
+    --applied-bg: #dafbe1;
+    --skipped: #9a6700;
+    --skipped-bg: #fff8c5;
+    --detected: #cf222e;
+    --detected-bg: #ffebe9;
+    --diff-old-bg: #fff8f8;
+    --diff-new-bg: #f3fbf3;
+    --validation: #8250df;
+    --validation-bg: #f3eafd;
+    --mapedit: #116329;
+    --mapedit-bg: #dafbe1;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px; line-height: 1.5; }
+  body { max-width: 1200px; margin: 0 auto; padding: 24px; }
+  code, pre { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px; }
+  h1 { margin: 0 0 4px; font-size: 24px; }
+  h2 { margin: 24px 0 12px; font-size: 16px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.04em; font-weight: 600; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .muted { color: var(--muted); }
+
+  .page-header { border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 16px; }
+  .meta-line { display: flex; gap: 24px; flex-wrap: wrap; color: var(--muted); font-size: 13px; }
+  .meta-line code { color: var(--text); background: var(--surface); border: 1px solid var(--border);
+    padding: 1px 6px; border-radius: 4px; }
+
+  .summary-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin: 16px 0; }
+  .metric { background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px; text-align: center; }
+  .metric .value { font-size: 28px; font-weight: 700; line-height: 1; }
+  .metric .label { font-size: 12px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.04em; margin-top: 6px; }
+  .metric.applied    .value { color: var(--applied);    }
+  .metric.skipped    .value { color: var(--skipped);    }
+  .metric.detected   .value { color: var(--detected);   }
+  .metric.validation .value { color: var(--validation); }
+  .metric.mapedit    .value { color: var(--mapedit);    }
+  .diff-line { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+
+  .files-section ul { margin: 0; padding-left: 18px; }
+  .files-section li { margin: 4px 0; }
+  .files-section.empty p { font-style: italic; }
+
+  .topic-filter { margin: 16px 0 8px; }
+  .topic-filter select { font: inherit; padding: 4px 8px; border: 1px solid var(--border);
+    border-radius: 4px; background: var(--surface); }
+
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .tabs button { font: inherit; cursor: pointer; padding: 8px 14px; border: none; background: transparent;
+    color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  .tabs button:hover { color: var(--text); }
+  .tabs button.active { color: var(--text); border-bottom-color: var(--accent); font-weight: 600; }
+
+  .op-list .op { background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    margin-bottom: 12px; overflow: hidden; }
+  .op.op-applied  { border-left: 4px solid var(--applied);  }
+  .op.op-skipped  { border-left: 4px solid var(--skipped);  }
+  .op.op-detected { border-left: 4px solid var(--detected); }
+  .op.op-mapedit  { border-left: 4px solid var(--mapedit);  }
+  .op-list.empty p { font-style: italic; padding: 12px; }
+
+  .op-header { display: flex; gap: 10px; align-items: center; padding: 10px 14px;
+    background: #fafbfc; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .op-num { color: var(--muted); font-size: 12px; }
+  .op-icon { font-size: 16px; }
+  .op-kind { font-weight: 600; font-size: 12px; padding: 2px 8px; border-radius: 999px;
+    background: var(--bg); color: var(--text); }
+  .op-applied  .op-kind { background: var(--applied-bg);  color: var(--applied);  }
+  .op-skipped  .op-kind { background: var(--skipped-bg);  color: var(--skipped);  }
+  .op-detected .op-kind { background: var(--detected-bg); color: var(--detected); }
+  .op-mapedit  .op-kind { background: var(--mapedit-bg);  color: var(--mapedit);  }
+
+  .op-snippet { background: #f6f8fa; border-top: 1px solid var(--border);
+    padding: 10px 14px; margin: 0; font-family: ui-monospace, monospace;
+    font-size: 12px; white-space: pre-wrap; overflow-x: auto; }
+  .op-snippet-label { display: block; font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px;
+    font-weight: 600; font-family: -apple-system, sans-serif; }
+  .op-location { color: var(--muted); font-size: 12px; flex: 1; overflow-wrap: anywhere; }
+  .op-action { font-weight: 600; font-size: 14px; }
+  .op-topic { color: var(--muted); font-size: 13px; }
+  .op-topic b { color: var(--text); font-weight: 600; }
+
+  /* Plain-language explanation under the diff */
+  .op-explanation { background: #f0f6fc; border-top: 1px solid var(--border);
+    padding: 14px 16px; }
+  /* Legacy classes (kept for any single-paragraph rewrites) */
+  .op-explanation-headline { font-weight: 600; margin-bottom: 4px; }
+  .op-explanation-action { font-size: 13px; color: var(--text); }
+
+  /* New two-section card layout: "What to do" steps + muted "Why" */
+  .op-action-label { font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.06em; font-weight: 700; color: var(--accent);
+    margin: 0 0 6px; }
+  .op-steps { margin: 0; padding: 0 0 0 22px; font-size: 14px;
+    color: var(--text); }
+  .op-steps li { margin: 4px 0; line-height: 1.45; }
+  .op-steps-fallback { font-size: 14px; color: var(--text); padding: 0; }
+  .op-why { margin-top: 10px; padding-top: 10px;
+    border-top: 1px dashed var(--border); font-size: 12px;
+    color: var(--muted); line-height: 1.5; }
+  .op-why-label { font-weight: 600; color: var(--muted);
+    text-transform: uppercase; font-size: 11px;
+    letter-spacing: 0.04em; margin-right: 4px; }
+
+  /* Location pointer in card header */
+  .op-location-friendly { display: inline-flex; align-items: center;
+    gap: 4px; color: var(--muted); font-size: 12px; font-family: ui-monospace,
+    SFMono-Regular, Menlo, Consolas, monospace; padding: 1px 6px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 4px; }
+  .op-warning { background: #fff8c5; border-top: 1px solid var(--border);
+    padding: 12px 14px; font-size: 13px; color: #7d5300; }
+  .op-warning b { color: #7d5300; }
+
+  /* Technical details: hidden by default, shown when #tech-toggle is
+     checked. Marked !important because some component classes (e.g.
+     .op-meta with display:grid) come after .tech-detail in the cascade
+     and would otherwise override the hide. The toggle is the single
+     entry point for revealing engineering data. */
+  .tech-detail { display: none !important; }
+  body.show-tech .tech-detail { display: revert !important; }
+  body.show-tech .op-header .tech-detail { display: inline !important; }
+  body.show-tech dl.tech-detail { display: grid !important; }
+
+  .tech-toggle { margin: 8px 0 16px; font-size: 13px; color: var(--muted); }
+  .tech-toggle label { cursor: pointer; user-select: none; }
+  .tech-toggle input { margin-right: 6px; vertical-align: middle; }
+
+  .action-items { background: var(--surface); border: 1px solid var(--border);
+    border-left: 4px solid var(--skipped); border-radius: 8px;
+    padding: 14px 18px; margin: 16px 0 24px; }
+  .action-items h2 { margin: 0 0 12px; font-size: 16px; color: var(--text);
+    text-transform: none; letter-spacing: 0; padding: 0; border: none; }
+  .action-items ul { list-style: none; padding: 0; margin: 0; }
+  .action-items.action-items-clear { border-left-color: var(--applied); }
+  .action-items.action-items-clear h2 { color: var(--applied); }
+  .action-item { display: flex; align-items: flex-start; gap: 14px;
+    padding: 10px 0; border-top: 1px solid var(--border); }
+  .action-item:first-child { border-top: none; padding-top: 0; }
+  .action-count { flex-shrink: 0; min-width: 38px; height: 38px;
+    border-radius: 8px; background: var(--skipped-bg); color: var(--skipped);
+    font-size: 18px; font-weight: 700; display: flex;
+    align-items: center; justify-content: center; padding: 0 8px; }
+  .action-body { flex: 1; }
+  .action-label { font-weight: 600; font-size: 15px; }
+  .action-where { color: var(--accent); font-weight: 600; font-size: 13px; }
+  .action-hint { color: var(--muted); font-size: 13px; margin-top: 2px; }
+
+  .op-diff { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .diff-side { padding: 10px 14px; }
+  .diff-side label { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.04em; margin-bottom: 6px; font-weight: 600; }
+  .diff-side pre { margin: 0; white-space: pre-wrap; word-break: break-word; }
+  .diff-old { background: var(--diff-old-bg); border-right: 1px solid var(--border); }
+  .diff-new { background: var(--diff-new-bg); }
+
+  .op-meta { margin: 0; padding: 10px 14px; border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 140px 1fr; gap: 4px 12px; }
+  .op-meta dt { color: var(--muted); font-size: 12px; font-weight: 600; }
+  .op-meta dd { margin: 0; font-size: 13px; overflow-wrap: anywhere; }
+
+  .topic-outline ol { background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px 12px 12px 32px; }
+  .topic-outline li { margin: 4px 0; }
+
+  /* Track-changes view */
+  .changes-section .file-changes { background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; margin-bottom: 10px; }
+  .changes-section .file-changes > summary { padding: 10px 14px; cursor: pointer; font-weight: 600;
+    font-family: ui-monospace, monospace; font-size: 13px; }
+  .changes-section .file-changes[open] > summary { border-bottom: 1px solid var(--border); }
+  .diff-pre { margin: 0; padding: 12px 14px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px; line-height: 1.5; white-space: pre-wrap; overflow-x: auto; }
+  .diff-pre .d-add { background: #dafbe1; color: #1a7f37; display: block; padding: 0 6px; border-left: 3px solid var(--applied); }
+  .diff-pre .d-del { background: #ffebe9; color: #cf222e; display: block; padding: 0 6px; border-left: 3px solid var(--detected); text-decoration: line-through; }
+  .diff-pre .d-ctx { display: block; padding: 0 6px; color: var(--muted); }
+
+  .validation-section ul.vissue-list { list-style: none; padding: 0; margin: 8px 0; }
+  .vissue { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--validation);
+    border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; }
+  .vissue.v-error   { border-left-color: var(--detected); }
+  .vissue.v-warning { border-left-color: var(--skipped);  }
+  .vissue-head { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: 13px; }
+  .vissue-num { color: var(--muted); font-size: 12px; }
+  .vissue-rule { font-weight: 600; font-family: ui-monospace, monospace; }
+  .vissue-role { font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 999px;
+    background: var(--validation-bg); color: var(--validation); }
+  .vissue.v-error   .vissue-role { background: var(--detected-bg); color: var(--detected); }
+  .vissue.v-warning .vissue-role { background: var(--skipped-bg);  color: var(--skipped);  }
+  .vissue-topic { color: var(--muted); }
+  .vissue-msg { margin: 6px 0 4px; }
+  .vissue-loc { font-size: 12px; color: var(--muted); }
+
+  @media (max-width: 800px) {
+    .summary-grid { grid-template-columns: repeat(3, 1fr); }
+    .op-diff { grid-template-columns: 1fr; }
+    .diff-old { border-right: none; border-bottom: 1px solid var(--border); }
+    .op-meta { grid-template-columns: 1fr; }
+    .op-meta dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+
+
+<header class="page-header">
+  <h1>DITA Parity Report</h1>
+  <div class="meta-line">
+    <span><b>Map:</b> <code>Premium_partner_benefits_FAQ.ditamap</code></span>
+    <span><b>Article:</b> <a href="https://www.linkedin.com/help/linkedin/answer/a1672649" target="_blank" rel="noopener">https://www.linkedin.com/help/linkedin/answer/a1672649</a></span>
+    <span><b>Generated:</b> 2026-06-12 10:46</span>
+  </div>
+</header>
+
+<section class="summary-grid"><div class="metric " title=""><div class="value">7</div><div class="label">Topics in map</div></div>
+<div class="metric applied" title="Updated in the DITA. Skim to confirm."><div class="value">10</div><div class="label">Done</div></div>
+<div class="metric skipped" title="The tool didn&#x27;t trust this enough to apply. Review and update by hand."><div class="value">2</div><div class="label">Needs review</div></div>
+<div class="metric detected" title="Found new content but couldn&#x27;t place it. Add by hand."><div class="value">0</div><div class="label">Add manually</div></div>
+<div class="metric validation" title="Schematron rules flagged these on the patched files."><div class="value">6</div><div class="label">Style/structure issues</div></div></section><div class="diff-line tech-detail"><b>Technical:</b> Diff opcodes — <b>13</b> equal · <b>10</b> replace · <b>1</b> delete · <b>5</b> insert</div><div class="tech-toggle"><label><input type="checkbox" id="tech-toggle"> Show technical details (xpaths, element tags, op kinds)</label></div>
+<section class="action-items"><h2>Before you commit — 12 items need your attention</h2><ul><li class="action-item"><div class="action-count">4</div><div class="action-body"><div class="action-label">Confirm the tool&#x27;s judgment calls <span class="action-where">→ Done tab — look for yellow notes</span></div><div class="action-hint">The tool made the change but guessed at something (e.g. whether a phrase should be &lt;em&gt; or &lt;uicontrol&gt;). Each card has a yellow &quot;Please verify&quot; note explaining the call.</div></div></li><li class="action-item"><div class="action-count">2</div><div class="action-body"><div class="action-label">Apply these changes by hand <span class="action-where">→ Needs review tab</span></div><div class="action-hint">The tool held these back — the safety guards weren&#x27;t sure it could rewrite without breaking something. Each card has a &quot;What to do&quot; checklist.</div></div></li><li class="action-item"><div class="action-count">6</div><div class="action-body"><div class="action-label">Fix style and structure issues <span class="action-where">→ Style and structure check</span></div><div class="action-hint">Schematron rules (from the IM) flagged these on the patched files — missing short descriptions, oversized notes, etc.</div></div></li></ul></section>
+<section class="files-section"><h2>Patched topic files (5)</h2><p class="muted">The tool updated these. Open each one and confirm the changes before committing.</p><ul><li><a href="Premium_partner_benefits_FAQ.dita"><b>Premium partner benefits FAQ</b></a> <code class="tech-detail">Premium_partner_benefits_FAQ.dita</code></li><li><a href="How_can_I_access_free_trials_offered_for.dita"><b>How can I access free trials offered for</b></a> <code class="tech-detail">How_can_I_access_free_trials_offered_for.dita</code></li><li><a href="Do_I_need_to_pay_an_additional_amount_to_access_th.dita"><b>Do I need to pay an additional amount to access th</b></a> <code class="tech-detail">Do_I_need_to_pay_an_additional_amount_to_access_th.dita</code></li><li><a href="Can_I_share_these_benefits_free_trial_with_others.dita"><b>Can I share these benefits free trial with others</b></a> <code class="tech-detail">Can_I_share_these_benefits_free_trial_with_others.dita</code></li><li><a href="What_if_I_am_already_a_Premium_subscriber.dita"><b>What if I am already a Premium subscriber</b></a> <code class="tech-detail">What_if_I_am_already_a_Premium_subscriber.dita</code></li></ul></section>
+<section class="changes-section"><h2>What the tool changed in each topic file (5 files)</h2><p class="muted">Green = the tool added this. Red, strikethrough = the tool removed this. Gray = unchanged context for orientation.</p><details class="file-changes" open><summary>Premium_partner_benefits_FAQ.dita</summary><pre class="diff-pre"><span class="d-ctx">  &lt;concept id=&quot;ID-0000003f&quot; xml:lang=&quot;en-US&quot;&gt;</span>
+<span class="d-ctx">    &lt;title&gt;Premium partner benefits FAQ&lt;/title&gt;</span>
+<span class="d-ctx">    &lt;prolog&gt;</span>
+<span class="d-ctx">      &lt;critdates&gt;</span>
+<span class="d-ctx">        &lt;revised modified=&quot;&quot; expiry=&quot;&quot; /&gt;</span>
+<span class="d-ctx">      &lt;/critdates&gt;</span>
+<span class="d-ctx">      &lt;permissions view=&quot;&quot; /&gt;</span>
+<span class="d-ctx">      &lt;change-historylist&gt;</span>
+<span class="d-ctx">        &lt;change-item&gt;</span>
+<span class="d-ctx">          &lt;change-organization /&gt;</span>
+<span class="d-ctx">          &lt;change-request-reference&gt;</span>
+<span class="d-ctx">            &lt;change-request-id /&gt;</span>
+<span class="d-ctx">          &lt;/change-request-reference&gt;</span>
+<span class="d-ctx">          &lt;change-completed /&gt;</span>
+<span class="d-ctx">          &lt;change-summary /&gt;</span>
+<span class="d-ctx">        &lt;/change-item&gt;</span>
+<span class="d-ctx">      &lt;/change-historylist&gt;</span>
+<span class="d-ctx">      &lt;metadata&gt;</span>
+<span class="d-ctx">        &lt;audience type=&quot;&quot; job=&quot;&quot; name=&quot;NAME&quot; /&gt;</span>
+<span class="d-ctx">        &lt;contentType&gt;Article&lt;/contentType&gt;</span>
+<span class="d-ctx">        &lt;helpCenter&gt;LinkedIn HC, Sales Navigator HC&lt;/helpCenter&gt;</span>
+<span class="d-ctx">        &lt;userJourney /&gt;</span>
+<span class="d-ctx">        &lt;systemUsage /&gt;</span>
+<span class="d-ctx">        &lt;billing /&gt;</span>
+<span class="d-ctx">        &lt;informational /&gt;</span>
+<span class="d-ctx">        &lt;integrations /&gt;</span>
+<span class="d-ctx">        &lt;hc_tasks /&gt;</span>
+<span class="d-ctx">        &lt;trust /&gt;</span>
+<span class="d-ctx">        &lt;keywords&gt;</span>
+<span class="d-ctx">          &lt;keyword /&gt;</span>
+<span class="d-ctx">        &lt;/keywords&gt;</span>
+<span class="d-ctx">        &lt;prodinfo&gt;</span>
+<span class="d-ctx">          &lt;prodname&gt;Premium&lt;/prodname&gt;</span>
+<span class="d-ctx">          &lt;LoB /&gt;</span>
+<span class="d-ctx">          &lt;feature /&gt;</span>
+<span class="d-ctx">          &lt;platform /&gt;</span>
+<span class="d-ctx">          &lt;subscriptionLevel /&gt;</span>
+<span class="d-ctx">          &lt;internalKeyword /&gt;</span>
+<span class="d-ctx">        &lt;/prodinfo&gt;</span>
+<span class="d-ctx">      &lt;/metadata&gt;</span>
+<span class="d-ctx">    &lt;/prolog&gt;</span>
+<span class="d-ctx">    &lt;conbody&gt;</span>
+<span class="d-ctx">      &lt;note type=&quot;important&quot;&gt;</span>
+<span class="d-del">-       &lt;p&gt;We are rolling out these benefits for a limited time to paying Premium members in select regions. These benefits cannot be redeemed on iOS devices. If you are using an iOS device, use a desktop to redeem your perks, regardless of where you purchased your subscription.&lt;/p&gt;</span>
+<span class="d-add">+       &lt;p&gt;</span>
+<span class="d-add">+         &lt;em&gt;Premium Perks and partner benefits are available&lt;/em&gt; to paying Premium subscribers &lt;em&gt;in select regions&lt;/em&gt;. Partner Perks are available &lt;em&gt;for a limited time and/or while supplies last&lt;/em&gt;. These benefits cannot be redeemed on iOS devices. If you are using an iOS device, please use a desktop to redeem your perks, regardless of where you purchased your subscription. Additional restrictions may apply and may be set by each partner. If you receive a notice of ineligibility on a partner’s site, please contact the partner directly for assistance.&lt;/p&gt;</span>
+<span class="d-ctx">      &lt;/note&gt;</span>
+<span class="d-ctx">      &lt;p&gt;When you subscribe or upgrade to a LinkedIn Premium subscription, you may be eligible for an exclusive offer that gives you complimentary access to the following service or platform through a free trial.&lt;/p&gt;</span>
+<span class="d-ctx">      &lt;draft-comment author=&quot;dawnstevens&quot;&gt;table has some different services than are currently in the live site.&lt;/draft-comment&gt;</span>
+<span class="d-ctx">      &lt;table outputclass=&quot;banded&quot;&gt;</span>
+<span class="d-ctx">        &lt;tgroup cols=&quot;3&quot;&gt;</span>
+<span class="d-ctx">          &lt;colspec colname=&quot;C0&quot; colwidth=&quot;1*&quot; /&gt;</span>
+<span class="d-ctx">          &lt;colspec colname=&quot;C1&quot; colwidth=&quot;1*&quot; /&gt;</span>
+<span class="d-ctx">          &lt;colspec colname=&quot;C2&quot; colwidth=&quot;3*&quot; /&gt;</span>
+<span class="d-ctx">          &lt;thead&gt;</span>
+<span class="d-ctx">            &lt;row&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C0&quot;&gt;Service&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C1&quot;&gt;Free Trial Period/ Benefit&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C2&quot;&gt;Details&lt;/entry&gt;</span>
+<span class="d-ctx">            &lt;/row&gt;</span>
+<span class="d-ctx">          &lt;/thead&gt;</span>
+<span class="d-ctx">          &lt;tbody&gt;</span>
+<span class="d-ctx">            &lt;row&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C0&quot;&gt;Leland&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C1&quot;&gt;One month&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C2&quot;&gt;Free coaching + 20% off for the following six months (available only in Canada, Germany, India, United Kingdom, and United States)&lt;/entry&gt;</span>
+<span class="d-ctx">            &lt;/row&gt;</span>
+<span class="d-ctx">            &lt;row&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C0&quot;&gt;Name.com&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C1&quot;&gt;Three months&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C2&quot;&gt;Free trial (including Website, Email and Domain)&lt;/entry&gt;</span>
+<span class="d-ctx">            &lt;/row&gt;</span>
+<span class="d-ctx">            &lt;row&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C0&quot;&gt;Wall Street Journal&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C1&quot;&gt;Three months&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C2&quot;&gt;Free trial including Wall Street Journal, Dow Jones, Barrons, and Marketwatch&lt;/entry&gt;</span>
+<span class="d-ctx">            &lt;/row&gt;</span>
+<span class="d-ctx">            &lt;row&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C0&quot;&gt;Duolingo&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C1&quot;&gt;Three months&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C2&quot;&gt;Trial of Super Duolingo&lt;/entry&gt;</span>
+<span class="d-ctx">            &lt;/row&gt;</span>
+<span class="d-ctx">            &lt;row&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C0&quot;&gt;Spotify&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C1&quot;&gt;Three months&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C2&quot;&gt;Free trial of Spotify Premium (available only in Australia, Brazil, Canada, France, Germany, India, Italy, Japan, Mexico, Poland, South Africa, South Korea (Premium Basic), Spain, United Kingdom, and United States)&lt;/entry&gt;</span>
+<span class="d-ctx">            &lt;/row&gt;</span>
+<span class="d-ctx">            &lt;row&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C0&quot;&gt;Masterclass&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C1&quot;&gt;Annual&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C2&quot;&gt;30% off on the annual pricing (English users only)&lt;/entry&gt;</span>
+<span class="d-ctx">            &lt;/row&gt;</span>
+<span class="d-ctx">            &lt;row&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C0&quot;&gt;Headspace&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C1&quot;&gt;Four months&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C2&quot;&gt;Free trial&lt;/entry&gt;</span>
+<span class="d-ctx">            &lt;/row&gt;</span>
+<span class="d-ctx">            &lt;row&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C0&quot;&gt;Notion&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C1&quot;&gt;Three months&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C2&quot;&gt;Free trial&lt;/entry&gt;</span>
+<span class="d-ctx">            &lt;/row&gt;</span>
+<span class="d-ctx">            &lt;row&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C0&quot;&gt;Founderscard&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C1&quot;&gt;One year&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C2&quot;&gt;Free trial&lt;/entry&gt;</span>
+<span class="d-ctx">            &lt;/row&gt;</span>
+<span class="d-ctx">            &lt;row&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C0&quot;&gt;NordVPN&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C1&quot;&gt;Three months&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C2&quot;&gt;Free trial&lt;/entry&gt;</span>
+<span class="d-ctx">            &lt;/row&gt;</span>
+<span class="d-ctx">            &lt;row&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C0&quot;&gt;Oura Ring&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C1&quot;&gt;One year&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C2&quot;&gt;10% off and one month free trial&lt;/entry&gt;</span>
+<span class="d-ctx">            &lt;/row&gt;</span>
+<span class="d-ctx">            &lt;row&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C0&quot;&gt;Duckbill&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C1&quot;&gt;Three months&lt;/entry&gt;</span>
+<span class="d-ctx">              &lt;entry colname=&quot;C2&quot;&gt;Free trial&lt;/entry&gt;</span>
+<span class="d-ctx">            &lt;/row&gt;</span>
+<span class="d-add">+           &lt;row&gt;</span>
+<span class="d-add">+             &lt;entry&gt;YouTube Premium&lt;/entry&gt;</span>
+<span class="d-add">+             &lt;entry&gt;Three Months&lt;/entry&gt;</span>
+<span class="d-add">+             &lt;entry&gt;Free trial of YouTube Premium (available only in United States, Brazil, Canada, Argentina, Mexico, United Kingdom, France, Germany, Turkey, Netherlands, Italy, United Arab Emirates, Switzerland, Spain, Sweden, South Africa, Denmark, Poland, Belgium, India, Australia, Indonesia, and Hong Kong.)&lt;/entry&gt;</span>
+<span class="d-add">+           &lt;/row&gt;</span>
+<span class="d-add">+           &lt;row&gt;</span>
+<span class="d-add">+             &lt;entry&gt;LegalZoom&lt;/entry&gt;</span>
+<span class="d-add">+             &lt;entry&gt;25% off the full LegalZoom product suite (available exclusively to Premium members in the United States)&lt;/entry&gt;</span>
+<span class="d-add">+           &lt;/row&gt;</span>
+<span class="d-add">+           &lt;row&gt;</span>
+<span class="d-add">+             &lt;entry&gt;Loveable&lt;/entry&gt;</span>
+<span class="d-add">+             &lt;entry&gt;One year&lt;/entry&gt;</span>
+<span class="d-add">+             &lt;entry&gt;300 one-time credits (available for Premium members except subscribers of Premium Company pages)&lt;/entry&gt;</span>
+<span class="d-add">+           &lt;/row&gt;</span>
+<span class="d-ctx">          &lt;/tbody&gt;</span>
+<span class="d-ctx">        &lt;/tgroup&gt;</span>
+<span class="d-ctx">      &lt;/table&gt;</span>
+<span class="d-ctx">      &lt;note othertype=&quot;feature&quot; type=&quot;other&quot;&gt;</span>
+<span class="d-ctx">        &lt;p&gt;Directly access Premium partner benefits&lt;/p&gt;</span>
+<span class="d-ctx">        &lt;p&gt;Enjoy complimentary access to select services and platforms through a free trial.&lt;/p&gt;</span>
+<span class="d-ctx">        &lt;p&gt;</span>
+<span class="d-ctx">          &lt;xref href=&quot;https://www.linkedin.com/premium/premium-perks&quot; scope=&quot;external&quot; outputclass=&quot;button&quot; format=&quot;html&quot;&gt;Access Premium partner benefits&lt;/xref&gt;</span>
+<span class="d-ctx">        &lt;/p&gt;</span>
+<span class="d-ctx">      &lt;/note&gt;</span>
+<span class="d-ctx">      &lt;p&gt;You can redeem access to all partner benefits (wherever applicable), and it is not limited to just one of them.&lt;/p&gt;</span>
+<span class="d-ctx">      &lt;p&gt;Here are some frequently asked questions about the Premium partner benefits:&lt;/p&gt;</span>
+<span class="d-ctx">    &lt;/conbody&gt;</span>
+<span class="d-ctx">  &lt;/concept&gt;</span></pre></details><details class="file-changes" open><summary>How_can_I_access_free_trials_offered_for.dita</summary><pre class="diff-pre"><span class="d-ctx">  &lt;concept id=&quot;ID-000000d5&quot; xml:lang=&quot;en-US&quot;&gt;</span>
+<span class="d-del">-   &lt;title&gt;How can I access free trials offered for?&lt;/title&gt;</span>
+<span class="d-add">+   &lt;title&gt;How can I access Premium perks?&lt;/title&gt;</span>
+<span class="d-ctx">    &lt;prolog&gt;</span>
+<span class="d-ctx">      &lt;critdates&gt;</span>
+<span class="d-ctx">        &lt;revised modified=&quot;&quot; expiry=&quot;&quot; /&gt;</span>
+<span class="d-ctx">      &lt;/critdates&gt;</span>
+<span class="d-ctx">      &lt;permissions view=&quot;&quot; /&gt;</span>
+<span class="d-ctx">      &lt;change-historylist&gt;</span>
+<span class="d-ctx">        &lt;change-item&gt;</span>
+<span class="d-ctx">          &lt;change-organization /&gt;</span>
+<span class="d-ctx">          &lt;change-request-reference&gt;</span>
+<span class="d-ctx">            &lt;change-request-id /&gt;</span>
+<span class="d-ctx">          &lt;/change-request-reference&gt;</span>
+<span class="d-ctx">          &lt;change-completed /&gt;</span>
+<span class="d-ctx">          &lt;change-summary /&gt;</span>
+<span class="d-ctx">        &lt;/change-item&gt;</span>
+<span class="d-ctx">      &lt;/change-historylist&gt;</span>
+<span class="d-ctx">      &lt;metadata&gt;</span>
+<span class="d-ctx">        &lt;audience type=&quot;&quot; job=&quot;&quot; name=&quot;NAME&quot; /&gt;</span>
+<span class="d-ctx">        &lt;contentType&gt;Article&lt;/contentType&gt;</span>
+<span class="d-ctx">        &lt;helpCenter&gt;LinkedIn HC, Sales Navigator HC&lt;/helpCenter&gt;</span>
+<span class="d-ctx">        &lt;userJourney /&gt;</span>
+<span class="d-ctx">        &lt;systemUsage /&gt;</span>
+<span class="d-ctx">        &lt;billing /&gt;</span>
+<span class="d-ctx">        &lt;informational /&gt;</span>
+<span class="d-ctx">        &lt;integrations /&gt;</span>
+<span class="d-ctx">        &lt;hc_tasks /&gt;</span>
+<span class="d-ctx">        &lt;trust /&gt;</span>
+<span class="d-ctx">        &lt;keywords&gt;</span>
+<span class="d-ctx">          &lt;keyword /&gt;</span>
+<span class="d-ctx">        &lt;/keywords&gt;</span>
+<span class="d-ctx">        &lt;prodinfo&gt;</span>
+<span class="d-ctx">          &lt;prodname&gt;Premium&lt;/prodname&gt;</span>
+<span class="d-ctx">          &lt;LoB /&gt;</span>
+<span class="d-ctx">          &lt;feature /&gt;</span>
+<span class="d-ctx">          &lt;platform /&gt;</span>
+<span class="d-ctx">          &lt;subscriptionLevel /&gt;</span>
+<span class="d-ctx">          &lt;internalKeyword /&gt;</span>
+<span class="d-ctx">        &lt;/prodinfo&gt;</span>
+<span class="d-ctx">      &lt;/metadata&gt;</span>
+<span class="d-ctx">    &lt;/prolog&gt;</span>
+<span class="d-ctx">    &lt;conbody&gt;</span>
+<span class="d-del">-     &lt;p&gt;On upgrading or subscribing to a LinkedIn Premium account, you will receive detailed instructions via email on how to redeem these exclusive offers. Please make sure you are subscribed to LinkedIn marketing emails. If you are eligible for Premium free trial, you will be eligible to redeem this offer after your free trial ends and you start paying for your Premium subscription.&lt;/p&gt;</span>
+<span class="d-add">+     &lt;p&gt;After you subscribe to LinkedIn Premium, you will receive an email with detailed instructions on how to redeem these exclusive offers. Please ensure you are subscribed to LinkedIn marketing emails. If you are eligible for a Premium free trial, you will only be eligible to redeem Premium Perks and/or offers after your free trial ends and you make your first Premium subscription payment.&lt;/p&gt;</span>
+<span class="d-ctx">    &lt;/conbody&gt;</span>
+<span class="d-ctx">  &lt;/concept&gt;</span></pre></details><details class="file-changes" open><summary>Do_I_need_to_pay_an_additional_amount_to_access_th.dita</summary><pre class="diff-pre"><span class="d-ctx">  &lt;concept id=&quot;ID-000000d7&quot; xml:lang=&quot;en-US&quot;&gt;</span>
+<span class="d-ctx">    &lt;title&gt;Do I need to pay an additional amount to access the Premium partner benefits?&lt;/title&gt;</span>
+<span class="d-ctx">    &lt;prolog&gt;</span>
+<span class="d-ctx">      &lt;critdates&gt;</span>
+<span class="d-ctx">        &lt;revised modified=&quot;&quot; expiry=&quot;&quot; /&gt;</span>
+<span class="d-ctx">      &lt;/critdates&gt;</span>
+<span class="d-ctx">      &lt;permissions view=&quot;&quot; /&gt;</span>
+<span class="d-ctx">      &lt;change-historylist&gt;</span>
+<span class="d-ctx">        &lt;change-item&gt;</span>
+<span class="d-ctx">          &lt;change-organization /&gt;</span>
+<span class="d-ctx">          &lt;change-request-reference&gt;</span>
+<span class="d-ctx">            &lt;change-request-id /&gt;</span>
+<span class="d-ctx">          &lt;/change-request-reference&gt;</span>
+<span class="d-ctx">          &lt;change-completed /&gt;</span>
+<span class="d-ctx">          &lt;change-summary /&gt;</span>
+<span class="d-ctx">        &lt;/change-item&gt;</span>
+<span class="d-ctx">      &lt;/change-historylist&gt;</span>
+<span class="d-ctx">      &lt;metadata&gt;</span>
+<span class="d-ctx">        &lt;audience type=&quot;&quot; job=&quot;&quot; name=&quot;NAME&quot; /&gt;</span>
+<span class="d-ctx">        &lt;contentType&gt;Article&lt;/contentType&gt;</span>
+<span class="d-ctx">        &lt;helpCenter&gt;LinkedIn HC, Sales Navigator HC&lt;/helpCenter&gt;</span>
+<span class="d-ctx">        &lt;userJourney /&gt;</span>
+<span class="d-ctx">        &lt;systemUsage /&gt;</span>
+<span class="d-ctx">        &lt;billing /&gt;</span>
+<span class="d-ctx">        &lt;informational /&gt;</span>
+<span class="d-ctx">        &lt;integrations /&gt;</span>
+<span class="d-ctx">        &lt;hc_tasks /&gt;</span>
+<span class="d-ctx">        &lt;trust /&gt;</span>
+<span class="d-ctx">        &lt;keywords&gt;</span>
+<span class="d-ctx">          &lt;keyword /&gt;</span>
+<span class="d-ctx">        &lt;/keywords&gt;</span>
+<span class="d-ctx">        &lt;prodinfo&gt;</span>
+<span class="d-ctx">          &lt;prodname&gt;Premium&lt;/prodname&gt;</span>
+<span class="d-ctx">          &lt;LoB /&gt;</span>
+<span class="d-ctx">          &lt;feature /&gt;</span>
+<span class="d-ctx">          &lt;platform /&gt;</span>
+<span class="d-ctx">          &lt;subscriptionLevel /&gt;</span>
+<span class="d-ctx">          &lt;internalKeyword /&gt;</span>
+<span class="d-ctx">        &lt;/prodinfo&gt;</span>
+<span class="d-ctx">      &lt;/metadata&gt;</span>
+<span class="d-ctx">    &lt;/prolog&gt;</span>
+<span class="d-ctx">    &lt;conbody&gt;</span>
+<span class="d-del">-     &lt;p&gt;No, these benefits are complimentary with your LinkedIn Premium subscription. However, please note that after the free trial periods, standard subscription rates will apply for the partner services unless canceled. Also complimentary subscriptions are not related to your LinkedIn subscription and are subject to their own renewal guidelines.&lt;/p&gt;</span>
+<span class="d-add">+     &lt;p&gt;No, these benefits are included with your LinkedIn Premium subscription. However, after any free trial periods, standard subscription rates may apply unless canceled per the terms set forth by the partner offering the benefit or perk. Please note that complimentary partner subscriptions are separate from your LinkedIn subscription and are subject to their own renewal terms.&lt;/p&gt;</span>
+<span class="d-ctx">    &lt;/conbody&gt;</span>
+<span class="d-ctx">  &lt;/concept&gt;</span></pre></details><details class="file-changes" open><summary>Can_I_share_these_benefits_free_trial_with_others.dita</summary><pre class="diff-pre"><span class="d-ctx">  &lt;concept id=&quot;ID-000000d9&quot; xml:lang=&quot;en-US&quot;&gt;</span>
+<span class="d-del">-   &lt;title&gt;Can I share these benefits/free trial with others?&lt;/title&gt;</span>
+<span class="d-add">+   &lt;title&gt;Can I share these benefits with others?&lt;/title&gt;</span>
+<span class="d-ctx">    &lt;prolog&gt;</span>
+<span class="d-ctx">      &lt;critdates&gt;</span>
+<span class="d-ctx">        &lt;revised modified=&quot;&quot; expiry=&quot;&quot; /&gt;</span>
+<span class="d-ctx">      &lt;/critdates&gt;</span>
+<span class="d-ctx">      &lt;permissions view=&quot;&quot; /&gt;</span>
+<span class="d-ctx">      &lt;change-historylist&gt;</span>
+<span class="d-ctx">        &lt;change-item&gt;</span>
+<span class="d-ctx">          &lt;change-organization /&gt;</span>
+<span class="d-ctx">          &lt;change-request-reference&gt;</span>
+<span class="d-ctx">            &lt;change-request-id /&gt;</span>
+<span class="d-ctx">          &lt;/change-request-reference&gt;</span>
+<span class="d-ctx">          &lt;change-completed /&gt;</span>
+<span class="d-ctx">          &lt;change-summary /&gt;</span>
+<span class="d-ctx">        &lt;/change-item&gt;</span>
+<span class="d-ctx">      &lt;/change-historylist&gt;</span>
+<span class="d-ctx">      &lt;metadata&gt;</span>
+<span class="d-ctx">        &lt;audience type=&quot;&quot; job=&quot;&quot; name=&quot;NAME&quot; /&gt;</span>
+<span class="d-ctx">        &lt;contentType&gt;Article&lt;/contentType&gt;</span>
+<span class="d-ctx">        &lt;helpCenter&gt;LinkedIn HC, Sales Navigator HC&lt;/helpCenter&gt;</span>
+<span class="d-ctx">        &lt;userJourney /&gt;</span>
+<span class="d-ctx">        &lt;systemUsage /&gt;</span>
+<span class="d-ctx">        &lt;billing /&gt;</span>
+<span class="d-ctx">        &lt;informational /&gt;</span>
+<span class="d-ctx">        &lt;integrations /&gt;</span>
+<span class="d-ctx">        &lt;hc_tasks /&gt;</span>
+<span class="d-ctx">        &lt;trust /&gt;</span>
+<span class="d-ctx">        &lt;keywords&gt;</span>
+<span class="d-ctx">          &lt;keyword /&gt;</span>
+<span class="d-ctx">        &lt;/keywords&gt;</span>
+<span class="d-ctx">        &lt;prodinfo&gt;</span>
+<span class="d-ctx">          &lt;prodname&gt;Premium&lt;/prodname&gt;</span>
+<span class="d-ctx">          &lt;LoB /&gt;</span>
+<span class="d-ctx">          &lt;feature /&gt;</span>
+<span class="d-ctx">          &lt;platform /&gt;</span>
+<span class="d-ctx">          &lt;subscriptionLevel /&gt;</span>
+<span class="d-ctx">          &lt;internalKeyword /&gt;</span>
+<span class="d-ctx">        &lt;/prodinfo&gt;</span>
+<span class="d-ctx">      &lt;/metadata&gt;</span>
+<span class="d-ctx">    &lt;/prolog&gt;</span>
+<span class="d-ctx">    &lt;conbody&gt;</span>
+<span class="d-del">-     &lt;p&gt;These exclusive benefits are intended for the personal use of the LinkedIn Premium account holder only. The unique codes are single use.&lt;/p&gt;</span>
+<span class="d-add">+     &lt;p&gt;These exclusive benefits are intended for the primary LinkedIn Premium account holder. The unique codes are single use.&lt;/p&gt;</span>
+<span class="d-ctx">    &lt;/conbody&gt;</span>
+<span class="d-ctx">  &lt;/concept&gt;</span></pre></details><details class="file-changes" open><summary>What_if_I_am_already_a_Premium_subscriber.dita</summary><pre class="diff-pre"><span class="d-ctx">  &lt;concept id=&quot;ID-000000e1&quot; xml:lang=&quot;en-US&quot;&gt;</span>
+<span class="d-ctx">    &lt;title&gt;What if I am already a Premium subscriber?&lt;/title&gt;</span>
+<span class="d-ctx">    &lt;prolog&gt;</span>
+<span class="d-ctx">      &lt;critdates&gt;</span>
+<span class="d-ctx">        &lt;revised modified=&quot;&quot; expiry=&quot;&quot; /&gt;</span>
+<span class="d-ctx">      &lt;/critdates&gt;</span>
+<span class="d-ctx">      &lt;permissions view=&quot;&quot; /&gt;</span>
+<span class="d-ctx">      &lt;change-historylist&gt;</span>
+<span class="d-ctx">        &lt;change-item&gt;</span>
+<span class="d-ctx">          &lt;change-organization /&gt;</span>
+<span class="d-ctx">          &lt;change-request-reference&gt;</span>
+<span class="d-ctx">            &lt;change-request-id /&gt;</span>
+<span class="d-ctx">          &lt;/change-request-reference&gt;</span>
+<span class="d-ctx">          &lt;change-completed /&gt;</span>
+<span class="d-ctx">          &lt;change-summary /&gt;</span>
+<span class="d-ctx">        &lt;/change-item&gt;</span>
+<span class="d-ctx">      &lt;/change-historylist&gt;</span>
+<span class="d-ctx">      &lt;metadata&gt;</span>
+<span class="d-ctx">        &lt;audience type=&quot;&quot; job=&quot;&quot; name=&quot;NAME&quot; /&gt;</span>
+<span class="d-ctx">        &lt;contentType&gt;Article&lt;/contentType&gt;</span>
+<span class="d-ctx">        &lt;helpCenter&gt;LinkedIn HC, Sales Navigator HC&lt;/helpCenter&gt;</span>
+<span class="d-ctx">        &lt;userJourney /&gt;</span>
+<span class="d-ctx">        &lt;systemUsage /&gt;</span>
+<span class="d-ctx">        &lt;billing /&gt;</span>
+<span class="d-ctx">        &lt;informational /&gt;</span>
+<span class="d-ctx">        &lt;integrations /&gt;</span>
+<span class="d-ctx">        &lt;hc_tasks /&gt;</span>
+<span class="d-ctx">        &lt;trust /&gt;</span>
+<span class="d-ctx">        &lt;keywords&gt;</span>
+<span class="d-ctx">          &lt;keyword /&gt;</span>
+<span class="d-ctx">        &lt;/keywords&gt;</span>
+<span class="d-ctx">        &lt;prodinfo&gt;</span>
+<span class="d-ctx">          &lt;prodname&gt;Premium&lt;/prodname&gt;</span>
+<span class="d-ctx">          &lt;LoB /&gt;</span>
+<span class="d-ctx">          &lt;feature /&gt;</span>
+<span class="d-ctx">          &lt;platform /&gt;</span>
+<span class="d-ctx">          &lt;subscriptionLevel /&gt;</span>
+<span class="d-ctx">          &lt;internalKeyword /&gt;</span>
+<span class="d-ctx">        &lt;/prodinfo&gt;</span>
+<span class="d-ctx">      &lt;/metadata&gt;</span>
+<span class="d-ctx">    &lt;/prolog&gt;</span>
+<span class="d-ctx">    &lt;conbody&gt;</span>
+<span class="d-add">+     &lt;p&gt;Premium Perks and partner benefits are available to Premium subscribers in select regions. You can view available Premium Perks &lt;xref href=&quot;https://www.linkedin.com/premium/premium-perks/&quot; scope=&quot;external&quot; format=&quot;html&quot;&gt;here&lt;/xref&gt;.&lt;/p&gt;</span>
+<span class="d-ctx">      &lt;p&gt;You will receive an email as well with instructions to redeem your free trial. This program is being rolled out to Premium subscribers on a rolling basis, please continue to check your email to see when you qualify for the exclusive offer.&lt;/p&gt;</span>
+<span class="d-ctx">    &lt;/conbody&gt;</span>
+<span class="d-ctx">  &lt;/concept&gt;</span></pre></details></section>
+<section class="validation-section"><h2>Style and structure check</h2><p>The Schematron rules in <code class="tech-detail">kms_global_rules.sch</code> flagged <b>6</b> issue(s) on your patched files <span class="tech-detail">(6 error · 0 warning · 0 info)</span>. Review each one below.</p><ul class="vissue-list"><li class="vissue v-error"><div class="vissue-head"><span class="vissue-num">#1</span> <span class="vissue-rule">IM_shortdesc02</span> <span class="vissue-role">ERROR</span> <code class="vissue-topic">Premium_partner_benefits_FAQ.dita</code></div><div class="vissue-msg">IM_shortdesc02: A short description is strongly recommended.</div><div class="vissue-loc"><b>at</b> <code>/concept</code></div></li><li class="vissue v-error"><div class="vissue-head"><span class="vissue-num">#2</span> <span class="vissue-rule">IM_note09</span> <span class="vissue-role">ERROR</span> <code class="vissue-topic">Premium_partner_benefits_FAQ.dita</code></div><div class="vissue-msg">IM_note09: The &lt;note&gt; element must have 225 characters or fewer.</div><div class="vissue-loc"><b>at</b> <code>/concept/conbody/note[1]</code></div></li><li class="vissue v-error"><div class="vissue-head"><span class="vissue-num">#3</span> <span class="vissue-rule">IM_shortdesc02</span> <span class="vissue-role">ERROR</span> <code class="vissue-topic">How_can_I_access_free_trials_offered_for.dita</code></div><div class="vissue-msg">IM_shortdesc02: A short description is strongly recommended.</div><div class="vissue-loc"><b>at</b> <code>/concept</code></div></li><li class="vissue v-error"><div class="vissue-head"><span class="vissue-num">#4</span> <span class="vissue-rule">IM_shortdesc02</span> <span class="vissue-role">ERROR</span> <code class="vissue-topic">Do_I_need_to_pay_an_additional_amount_to_access_th.dita</code></div><div class="vissue-msg">IM_shortdesc02: A short description is strongly recommended.</div><div class="vissue-loc"><b>at</b> <code>/concept</code></div></li><li class="vissue v-error"><div class="vissue-head"><span class="vissue-num">#5</span> <span class="vissue-rule">IM_shortdesc02</span> <span class="vissue-role">ERROR</span> <code class="vissue-topic">Can_I_share_these_benefits_free_trial_with_others.dita</code></div><div class="vissue-msg">IM_shortdesc02: A short description is strongly recommended.</div><div class="vissue-loc"><b>at</b> <code>/concept</code></div></li><li class="vissue v-error"><div class="vissue-head"><span class="vissue-num">#6</span> <span class="vissue-rule">IM_shortdesc02</span> <span class="vissue-role">ERROR</span> <code class="vissue-topic">What_if_I_am_already_a_Premium_subscriber.dita</code></div><div class="vissue-msg">IM_shortdesc02: A short description is strongly recommended.</div><div class="vissue-loc"><b>at</b> <code>/concept</code></div></li></ul></section>
+<div class="topic-filter"><label for="topic-select">Focus on one topic:</label> <select id="topic-select"><option value="">Show all topics</option><option value="Premium_partner_benefits_FAQ.dita">Premium partner benefits FAQ</option><option value="How_can_I_access_free_trials_offered_for.dita">How can I access free trials offered for</option><option value="Do_I_need_to_pay_an_additional_amount_to_access_th.dita">Do I need to pay an additional amount to access th</option><option value="Can_I_share_these_benefits_free_trial_with_others.dita">Can I share these benefits free trial with others</option><option value="How_do_I_upgrade_to_LinkedIn_Premium_account.dita">How do I upgrade to LinkedIn Premium account</option><option value="What_if_I_m_already_subscribed_to_one_of_the_Pre.dita">What if I m already subscribed to one of the Pre</option><option value="What_if_I_am_already_a_Premium_subscriber.dita">What if I am already a Premium subscriber</option></select></div>
+
+<nav class="tabs" role="tablist">
+  <button data-tab="all" class="active">All changes (12)</button>
+  <button data-tab="applied">✓ Done (10)</button>
+  <button data-tab="skipped">⏸ Needs review (2)</button>
+  <button data-tab="detected">⚠ Add manually (0)</button>
+  
+</nav>
+
+<section class="op-list">
+<article class="op op-skipped" data-category="skipped" data-topic="Premium_partner_benefits_FAQ.dita">
+  <header class="op-header">
+    <span class="op-num">#1</span>
+    <span class="op-icon">⏸</span>
+    <span class="op-action">Looks removed (needs your review)</span>
+    <span class="op-topic">in <b>Premium partner benefits FAQ</b></span>
+    <span class="op-location-friendly">📍 table → tgroup → tbody → row 6</span>
+    <code class="op-location tech-detail">DELETE @ Premium_partner_benefits_FAQ.dita :: /concept/conbody[1]/table[1]/tgroup[1]/tbody[1]/row[6]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Currently in your DITA</label><pre>Masterclass Annual 30% off on the annual pricing (English users only)</pre></div><div class="diff-side diff-new muted"><label>—</label><pre>(no longer in the article)</pre></div></div>
+  <div class="op-explanation"><div class="op-action-label">What to do</div><ol class="op-steps"><li>Open the topic file at the location shown above.</li><li>Update the row&#x27;s &lt;entry&gt; cells with the new article wording.</li><li>Keep any &lt;uicontrol&gt; wrappers on label cells.</li></ol><div class="op-why"><span class="op-why-label">Why the tool didn't do this:</span> This is an existing table row. The tool doesn&#x27;t auto-rewrite rows because of cell-by-cell content alignment.</div></div>
+  <dl class="op-meta tech-detail"><dt>Topic file</dt><dd>Premium_partner_benefits_FAQ.dita</dd><dt>Element</dt><dd>&lt;row&gt;</dd><dt>Xpath</dt><dd>/concept/conbody[1]/table[1]/tgroup[1]/tbody[1]/row[6]</dd><dt>Original reason (technical)</dt><dd>structural element &lt;row&gt; — diff alignment is unreliable for multi-child blocks; review manually</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="Premium_partner_benefits_FAQ.dita">
+  <header class="op-header">
+    <span class="op-num">#2</span>
+    <span class="op-icon">✓</span>
+    <span class="op-action">Reworded</span>
+    <span class="op-topic">in <b>Premium partner benefits FAQ</b></span>
+    <span class="op-location-friendly">📍 note</span>
+    <code class="op-location tech-detail">REPLACE @ Premium_partner_benefits_FAQ.dita :: /concept/conbody[1]/note[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Currently in your DITA</label><pre>We are rolling out these benefits for a limited time to paying Premium members in select regions. These benefits cannot be redeemed on iOS devices. If you are using an iOS device, use a desktop to redeem your perks, regardless of where you purchased your subscription.</pre></div><div class="diff-side diff-new"><label>In the updated article</label><pre>Premium Perks and partner benefits are available to paying Premium subscribers in select regions. Partner Perks are available for a limited time and/or while supplies last. These benefits cannot be redeemed on iOS devices. If you are using an iOS device, please use a desktop to redeem your perks, regardless of where you purchased your subscription. Additional restrictions may apply and may be set by each partner. If you receive a notice of ineligibility on a partner’s site, please contact the partner directly for assistance.</pre></div></div>
+  <div class="op-warning"><b>Please verify:</b> &lt;note&gt; body was rewritten as &lt;p&gt; children from the article text. Verify the new note still reads correctly and that paragraph breaks (if any) landed where you expect.</div>
+  <dl class="op-meta tech-detail"><dt>Topic file</dt><dd>Premium_partner_benefits_FAQ.dita</dd><dt>Element</dt><dd>&lt;note&gt;</dd><dt>Xpath</dt><dd>/concept/conbody[1]/note[1]</dd><dt>Note type</dt><dd>important</dd><dt>Original warning (technical)</dt><dd>&lt;note&gt; body was rewritten as &lt;p&gt; children from the article text. Verify the new note still reads correctly and that paragraph breaks (if any) landed where you expect.</dd></dl>
+  
+</article>
+
+
+<article class="op op-skipped" data-category="skipped" data-topic="Premium_partner_benefits_FAQ.dita">
+  <header class="op-header">
+    <span class="op-num">#3</span>
+    <span class="op-icon">⏸</span>
+    <span class="op-action">New content (needs your review)</span>
+    <span class="op-topic">in <b>Premium partner benefits FAQ (insert near here)</b></span>
+    <span class="op-location-friendly">📍 after table → tgroup → tbody → row 12</span>
+    <code class="op-location tech-detail">INSERT @ after Premium_partner_benefits_FAQ.dita :: /concept/conbody[1]/table[1]/tgroup[1]/tbody[1]/row[12]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old muted"><label>—</label><pre>(nothing here yet — this is new content)</pre></div><div class="diff-side diff-new"><label>In the updated article</label><pre>Achieve your personal and professional goals with LinkedIn Premium Perks.
+
+
+
+
+
+
+
+Access Premium partner benefits</pre></div></div>
+  <div class="op-explanation"><div class="op-action-label">What to do</div><div class="op-steps-fallback">Review this change manually. The tool wasn't sure how to handle it.</div><div class="op-why"><span class="op-why-label">Technical reason:</span> row INSERT detected but the article parser captured no cell data; cannot build a structurally valid &lt;row&gt;.</div></div>
+  <dl class="op-meta tech-detail"><dt>Anchor topic file</dt><dd>Premium_partner_benefits_FAQ.dita</dd><dt>Anchor xpath</dt><dd>/concept/conbody[1]/table[1]/tgroup[1]/tbody[1]/row[12]</dd><dt>Original reason (technical)</dt><dd>row INSERT detected but the article parser captured no cell data; cannot build a structurally valid &lt;row&gt;.</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="Premium_partner_benefits_FAQ.dita">
+  <header class="op-header">
+    <span class="op-num">#4</span>
+    <span class="op-icon">✓</span>
+    <span class="op-action">Added</span>
+    <span class="op-topic">in <b>Premium partner benefits FAQ (insert near here)</b></span>
+    <span class="op-location-friendly">📍 after table → tgroup → tbody → row 12</span>
+    <code class="op-location tech-detail">INSERT @ after Premium_partner_benefits_FAQ.dita :: /concept/conbody[1]/table[1]/tgroup[1]/tbody[1]/row[12]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old muted"><label>—</label><pre>(nothing here yet — this is new content)</pre></div><div class="diff-side diff-new"><label>In the updated article</label><pre>Loveable One year 300 one-time credits (available for Premium members except subscribers of Premium Company pages)</pre></div></div>
+  <div class="op-warning"><b>Please verify:</b> new &lt;row&gt; inserted; bold cell text wrapped in &lt;em&gt;. If your existing rows wrap the label cell in &lt;uicontrol&gt;, swap &lt;em&gt; for &lt;uicontrol&gt; manually.</div>
+  <dl class="op-meta tech-detail"><dt>Anchor topic file</dt><dd>Premium_partner_benefits_FAQ.dita</dd><dt>Anchor xpath</dt><dd>/concept/conbody[1]/table[1]/tgroup[1]/tbody[1]/row[12]</dd><dt>Original warning (technical)</dt><dd>new &lt;row&gt; inserted; bold cell text wrapped in &lt;em&gt;. If your existing rows wrap the label cell in &lt;uicontrol&gt;, swap &lt;em&gt; for &lt;uicontrol&gt; manually.</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="Premium_partner_benefits_FAQ.dita">
+  <header class="op-header">
+    <span class="op-num">#5</span>
+    <span class="op-icon">✓</span>
+    <span class="op-action">Added</span>
+    <span class="op-topic">in <b>Premium partner benefits FAQ (insert near here)</b></span>
+    <span class="op-location-friendly">📍 after table → tgroup → tbody → row 12</span>
+    <code class="op-location tech-detail">INSERT @ after Premium_partner_benefits_FAQ.dita :: /concept/conbody[1]/table[1]/tgroup[1]/tbody[1]/row[12]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old muted"><label>—</label><pre>(nothing here yet — this is new content)</pre></div><div class="diff-side diff-new"><label>In the updated article</label><pre>LegalZoom 25% off the full LegalZoom product suite (available exclusively to Premium members in the United States)</pre></div></div>
+  <div class="op-warning"><b>Please verify:</b> new &lt;row&gt; inserted; bold cell text wrapped in &lt;em&gt;. If your existing rows wrap the label cell in &lt;uicontrol&gt;, swap &lt;em&gt; for &lt;uicontrol&gt; manually.</div>
+  <dl class="op-meta tech-detail"><dt>Anchor topic file</dt><dd>Premium_partner_benefits_FAQ.dita</dd><dt>Anchor xpath</dt><dd>/concept/conbody[1]/table[1]/tgroup[1]/tbody[1]/row[12]</dd><dt>Original warning (technical)</dt><dd>new &lt;row&gt; inserted; bold cell text wrapped in &lt;em&gt;. If your existing rows wrap the label cell in &lt;uicontrol&gt;, swap &lt;em&gt; for &lt;uicontrol&gt; manually.</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="Premium_partner_benefits_FAQ.dita">
+  <header class="op-header">
+    <span class="op-num">#6</span>
+    <span class="op-icon">✓</span>
+    <span class="op-action">Added</span>
+    <span class="op-topic">in <b>Premium partner benefits FAQ (insert near here)</b></span>
+    <span class="op-location-friendly">📍 after table → tgroup → tbody → row 12</span>
+    <code class="op-location tech-detail">INSERT @ after Premium_partner_benefits_FAQ.dita :: /concept/conbody[1]/table[1]/tgroup[1]/tbody[1]/row[12]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old muted"><label>—</label><pre>(nothing here yet — this is new content)</pre></div><div class="diff-side diff-new"><label>In the updated article</label><pre>YouTube Premium Three Months Free trial of YouTube Premium (available only in United States, Brazil, Canada, Argentina, Mexico, United Kingdom, France, Germany, Turkey, Netherlands, Italy, United Arab Emirates, Switzerland, Spain, Sweden, South Africa, Denmark, Poland, Belgium, India, Australia, Indonesia, and Hong Kong.)</pre></div></div>
+  <div class="op-warning"><b>Please verify:</b> new &lt;row&gt; inserted; bold cell text wrapped in &lt;em&gt;. If your existing rows wrap the label cell in &lt;uicontrol&gt;, swap &lt;em&gt; for &lt;uicontrol&gt; manually.</div>
+  <dl class="op-meta tech-detail"><dt>Anchor topic file</dt><dd>Premium_partner_benefits_FAQ.dita</dd><dt>Anchor xpath</dt><dd>/concept/conbody[1]/table[1]/tgroup[1]/tbody[1]/row[12]</dd><dt>Original warning (technical)</dt><dd>new &lt;row&gt; inserted; bold cell text wrapped in &lt;em&gt;. If your existing rows wrap the label cell in &lt;uicontrol&gt;, swap &lt;em&gt; for &lt;uicontrol&gt; manually.</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="How_can_I_access_free_trials_offered_for.dita">
+  <header class="op-header">
+    <span class="op-num">#7</span>
+    <span class="op-icon">✓</span>
+    <span class="op-action">Reworded</span>
+    <span class="op-topic">in <b>How can I access free trials offered for</b></span>
+    <span class="op-location-friendly">📍 title</span>
+    <code class="op-location tech-detail">REPLACE @ How_can_I_access_free_trials_offered_for.dita :: /concept/title[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Currently in your DITA</label><pre>How can I access free trials offered for?</pre></div><div class="diff-side diff-new"><label>In the updated article</label><pre>How can I access Premium perks?</pre></div></div>
+  
+  <dl class="op-meta tech-detail"><dt>Topic file</dt><dd>How_can_I_access_free_trials_offered_for.dita</dd><dt>Element</dt><dd>&lt;title&gt;</dd><dt>Xpath</dt><dd>/concept/title[1]</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="How_can_I_access_free_trials_offered_for.dita">
+  <header class="op-header">
+    <span class="op-num">#8</span>
+    <span class="op-icon">✓</span>
+    <span class="op-action">Reworded</span>
+    <span class="op-topic">in <b>How can I access free trials offered for</b></span>
+    <span class="op-location-friendly">📍 p</span>
+    <code class="op-location tech-detail">REPLACE @ How_can_I_access_free_trials_offered_for.dita :: /concept/conbody[1]/p[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Currently in your DITA</label><pre>On upgrading or subscribing to a LinkedIn Premium account, you will receive detailed instructions via email on how to redeem these exclusive offers. Please make sure you are subscribed to LinkedIn marketing emails. If you are eligible for Premium free trial, you will be eligible to redeem this offer after your free trial ends and you start paying for your Premium subscription.</pre></div><div class="diff-side diff-new"><label>In the updated article</label><pre>After you subscribe to LinkedIn Premium, you will receive an email with detailed instructions on how to redeem these exclusive offers. Please ensure you are subscribed to LinkedIn marketing emails. If you are eligible for a Premium free trial, you will only be eligible to redeem Premium Perks and/or offers after your free trial ends and you make your first Premium subscription payment.</pre></div></div>
+  
+  <dl class="op-meta tech-detail"><dt>Topic file</dt><dd>How_can_I_access_free_trials_offered_for.dita</dd><dt>Element</dt><dd>&lt;p&gt;</dd><dt>Xpath</dt><dd>/concept/conbody[1]/p[1]</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="Do_I_need_to_pay_an_additional_amount_to_access_th.dita">
+  <header class="op-header">
+    <span class="op-num">#9</span>
+    <span class="op-icon">✓</span>
+    <span class="op-action">Reworded</span>
+    <span class="op-topic">in <b>Do I need to pay an additional amount to access th</b></span>
+    <span class="op-location-friendly">📍 p</span>
+    <code class="op-location tech-detail">REPLACE @ Do_I_need_to_pay_an_additional_amount_to_access_th.dita :: /concept/conbody[1]/p[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Currently in your DITA</label><pre>No, these benefits are complimentary with your LinkedIn Premium subscription. However, please note that after the free trial periods, standard subscription rates will apply for the partner services unless canceled. Also complimentary subscriptions are not related to your LinkedIn subscription and are subject to their own renewal guidelines.</pre></div><div class="diff-side diff-new"><label>In the updated article</label><pre>No, these benefits are included with your LinkedIn Premium subscription. However, after any free trial periods, standard subscription rates may apply unless canceled per the terms set forth by the partner offering the benefit or perk. Please note that complimentary partner subscriptions are separate from your LinkedIn subscription and are subject to their own renewal terms.</pre></div></div>
+  
+  <dl class="op-meta tech-detail"><dt>Topic file</dt><dd>Do_I_need_to_pay_an_additional_amount_to_access_th.dita</dd><dt>Element</dt><dd>&lt;p&gt;</dd><dt>Xpath</dt><dd>/concept/conbody[1]/p[1]</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="Can_I_share_these_benefits_free_trial_with_others.dita">
+  <header class="op-header">
+    <span class="op-num">#10</span>
+    <span class="op-icon">✓</span>
+    <span class="op-action">Reworded</span>
+    <span class="op-topic">in <b>Can I share these benefits free trial with others</b></span>
+    <span class="op-location-friendly">📍 title</span>
+    <code class="op-location tech-detail">REPLACE @ Can_I_share_these_benefits_free_trial_with_others.dita :: /concept/title[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Currently in your DITA</label><pre>Can I share these benefits/free trial with others?</pre></div><div class="diff-side diff-new"><label>In the updated article</label><pre>Can I share these benefits with others?</pre></div></div>
+  
+  <dl class="op-meta tech-detail"><dt>Topic file</dt><dd>Can_I_share_these_benefits_free_trial_with_others.dita</dd><dt>Element</dt><dd>&lt;title&gt;</dd><dt>Xpath</dt><dd>/concept/title[1]</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="Can_I_share_these_benefits_free_trial_with_others.dita">
+  <header class="op-header">
+    <span class="op-num">#11</span>
+    <span class="op-icon">✓</span>
+    <span class="op-action">Reworded</span>
+    <span class="op-topic">in <b>Can I share these benefits free trial with others</b></span>
+    <span class="op-location-friendly">📍 p</span>
+    <code class="op-location tech-detail">REPLACE @ Can_I_share_these_benefits_free_trial_with_others.dita :: /concept/conbody[1]/p[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Currently in your DITA</label><pre>These exclusive benefits are intended for the personal use of the LinkedIn Premium account holder only. The unique codes are single use.</pre></div><div class="diff-side diff-new"><label>In the updated article</label><pre>These exclusive benefits are intended for the primary LinkedIn Premium account holder. The unique codes are single use.</pre></div></div>
+  
+  <dl class="op-meta tech-detail"><dt>Topic file</dt><dd>Can_I_share_these_benefits_free_trial_with_others.dita</dd><dt>Element</dt><dd>&lt;p&gt;</dd><dt>Xpath</dt><dd>/concept/conbody[1]/p[1]</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="What_if_I_am_already_a_Premium_subscriber.dita">
+  <header class="op-header">
+    <span class="op-num">#12</span>
+    <span class="op-icon">✓</span>
+    <span class="op-action">Added</span>
+    <span class="op-topic">in <b>What if I am already a Premium subscriber (insert near here)</b></span>
+    <span class="op-location-friendly">📍 after title</span>
+    <code class="op-location tech-detail">INSERT @ after What_if_I_am_already_a_Premium_subscriber.dita :: /concept/title[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old muted"><label>—</label><pre>(nothing here yet — this is new content)</pre></div><div class="diff-side diff-new"><label>In the updated article</label><pre>Premium Perks and partner benefits are available to Premium subscribers in select regions. You can view available Premium Perks here.</pre></div></div>
+  
+  <dl class="op-meta tech-detail"><dt>Anchor topic file</dt><dd>What_if_I_am_already_a_Premium_subscriber.dita</dd><dt>Anchor xpath</dt><dd>/concept/title[1]</dd></dl>
+  
+</article>
+</section>
+<section class="topic-outline"><h2>Topics in your map (in publication order)</h2><ol><li><b>Premium partner benefits FAQ</b> <span class="muted">— 19 item(s)</span><code class="tech-detail"> (Premium_partner_benefits_FAQ.dita)</code></li><li><b>How can I access free trials offered for</b> <span class="muted">— 2 item(s)</span><code class="tech-detail"> (How_can_I_access_free_trials_offered_for.dita)</code></li><li><b>Do I need to pay an additional amount to access th</b> <span class="muted">— 2 item(s)</span><code class="tech-detail"> (Do_I_need_to_pay_an_additional_amount_to_access_th.dita)</code></li><li><b>Can I share these benefits free trial with others</b> <span class="muted">— 2 item(s)</span><code class="tech-detail"> (Can_I_share_these_benefits_free_trial_with_others.dita)</code></li><li><b>How do I upgrade to LinkedIn Premium account</b> <span class="muted">— 2 item(s)</span><code class="tech-detail"> (How_do_I_upgrade_to_LinkedIn_Premium_account.dita)</code></li><li><b>What if I m already subscribed to one of the Pre</b> <span class="muted">— 2 item(s)</span><code class="tech-detail"> (What_if_I_m_already_subscribed_to_one_of_the_Pre.dita)</code></li><li><b>What if I am already a Premium subscriber</b> <span class="muted">— 2 item(s)</span><code class="tech-detail"> (What_if_I_am_already_a_Premium_subscriber.dita)</code></li></ol></section>
+
+<script>
+(function () {
+  const tabs = document.querySelectorAll('.tabs button');
+  const ops = document.querySelectorAll('.op');
+  const topicSelect = document.getElementById('topic-select');
+  let activeTab = 'all';
+  let activeTopic = '';
+
+  function applyFilters() {
+    ops.forEach(op => {
+      const matchTab = activeTab === 'all' || op.dataset.category === activeTab;
+      const matchTopic = !activeTopic || op.dataset.topic === activeTopic;
+      op.style.display = (matchTab && matchTopic) ? '' : 'none';
+    });
+  }
+
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeTab = btn.dataset.tab;
+      applyFilters();
+    });
+  });
+
+  if (topicSelect) {
+    topicSelect.addEventListener('change', () => {
+      activeTopic = topicSelect.value;
+      applyFilters();
+    });
+  }
+
+  const techToggle = document.getElementById('tech-toggle');
+  if (techToggle) {
+    techToggle.addEventListener('change', () => {
+      document.body.classList.toggle('show-tech', techToggle.checked);
+    });
+  }
+})();
+</script>
+
+</body></html>

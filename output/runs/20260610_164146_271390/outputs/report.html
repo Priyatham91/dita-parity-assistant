@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DITA Parity Report — Comment_on_posts_and_reply_to_a_comment.ditamap</title>
+<style>
+  :root {
+    --bg: #f7f7f8;
+    --surface: #ffffff;
+    --text: #1f2328;
+    --muted: #6e7681;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --applied: #1a7f37;
+    --applied-bg: #dafbe1;
+    --skipped: #9a6700;
+    --skipped-bg: #fff8c5;
+    --detected: #cf222e;
+    --detected-bg: #ffebe9;
+    --diff-old-bg: #fff8f8;
+    --diff-new-bg: #f3fbf3;
+    --validation: #8250df;
+    --validation-bg: #f3eafd;
+    --mapedit: #116329;
+    --mapedit-bg: #dafbe1;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px; line-height: 1.5; }
+  body { max-width: 1200px; margin: 0 auto; padding: 24px; }
+  code, pre { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px; }
+  h1 { margin: 0 0 4px; font-size: 24px; }
+  h2 { margin: 24px 0 12px; font-size: 16px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.04em; font-weight: 600; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .muted { color: var(--muted); }
+
+  .page-header { border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 16px; }
+  .meta-line { display: flex; gap: 24px; flex-wrap: wrap; color: var(--muted); font-size: 13px; }
+  .meta-line code { color: var(--text); background: var(--surface); border: 1px solid var(--border);
+    padding: 1px 6px; border-radius: 4px; }
+
+  .summary-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin: 16px 0; }
+  .metric { background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px; text-align: center; }
+  .metric .value { font-size: 28px; font-weight: 700; line-height: 1; }
+  .metric .label { font-size: 12px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.04em; margin-top: 6px; }
+  .metric.applied    .value { color: var(--applied);    }
+  .metric.skipped    .value { color: var(--skipped);    }
+  .metric.detected   .value { color: var(--detected);   }
+  .metric.validation .value { color: var(--validation); }
+  .metric.mapedit    .value { color: var(--mapedit);    }
+  .diff-line { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+
+  .files-section ul { margin: 0; padding-left: 18px; }
+  .files-section li { margin: 4px 0; }
+  .files-section.empty p { font-style: italic; }
+
+  .topic-filter { margin: 16px 0 8px; }
+  .topic-filter select { font: inherit; padding: 4px 8px; border: 1px solid var(--border);
+    border-radius: 4px; background: var(--surface); }
+
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .tabs button { font: inherit; cursor: pointer; padding: 8px 14px; border: none; background: transparent;
+    color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  .tabs button:hover { color: var(--text); }
+  .tabs button.active { color: var(--text); border-bottom-color: var(--accent); font-weight: 600; }
+
+  .op-list .op { background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    margin-bottom: 12px; overflow: hidden; }
+  .op.op-applied  { border-left: 4px solid var(--applied);  }
+  .op.op-skipped  { border-left: 4px solid var(--skipped);  }
+  .op.op-detected { border-left: 4px solid var(--detected); }
+  .op.op-mapedit  { border-left: 4px solid var(--mapedit);  }
+  .op-list.empty p { font-style: italic; padding: 12px; }
+
+  .op-header { display: flex; gap: 10px; align-items: center; padding: 10px 14px;
+    background: #fafbfc; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .op-num { color: var(--muted); font-size: 12px; }
+  .op-icon { font-size: 16px; }
+  .op-kind { font-weight: 600; font-size: 12px; padding: 2px 8px; border-radius: 999px;
+    background: var(--bg); color: var(--text); }
+  .op-applied  .op-kind { background: var(--applied-bg);  color: var(--applied);  }
+  .op-skipped  .op-kind { background: var(--skipped-bg);  color: var(--skipped);  }
+  .op-detected .op-kind { background: var(--detected-bg); color: var(--detected); }
+  .op-mapedit  .op-kind { background: var(--mapedit-bg);  color: var(--mapedit);  }
+
+  .op-snippet { background: #f6f8fa; border-top: 1px solid var(--border);
+    padding: 10px 14px; margin: 0; font-family: ui-monospace, monospace;
+    font-size: 12px; white-space: pre-wrap; overflow-x: auto; }
+  .op-snippet-label { display: block; font-size: 11px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px;
+    font-weight: 600; font-family: -apple-system, sans-serif; }
+  .op-location { color: var(--muted); font-size: 12px; flex: 1; overflow-wrap: anywhere; }
+
+  .op-diff { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .diff-side { padding: 10px 14px; }
+  .diff-side label { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.04em; margin-bottom: 6px; font-weight: 600; }
+  .diff-side pre { margin: 0; white-space: pre-wrap; word-break: break-word; }
+  .diff-old { background: var(--diff-old-bg); border-right: 1px solid var(--border); }
+  .diff-new { background: var(--diff-new-bg); }
+
+  .op-meta { margin: 0; padding: 10px 14px; border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 140px 1fr; gap: 4px 12px; }
+  .op-meta dt { color: var(--muted); font-size: 12px; font-weight: 600; }
+  .op-meta dd { margin: 0; font-size: 13px; overflow-wrap: anywhere; }
+
+  .topic-outline ol { background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px 12px 12px 32px; }
+  .topic-outline li { margin: 4px 0; }
+
+  /* Track-changes view */
+  .changes-section .file-changes { background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; margin-bottom: 10px; }
+  .changes-section .file-changes > summary { padding: 10px 14px; cursor: pointer; font-weight: 600;
+    font-family: ui-monospace, monospace; font-size: 13px; }
+  .changes-section .file-changes[open] > summary { border-bottom: 1px solid var(--border); }
+  .diff-pre { margin: 0; padding: 12px 14px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px; line-height: 1.5; white-space: pre-wrap; overflow-x: auto; }
+  .diff-pre .d-add { background: #dafbe1; color: #1a7f37; display: block; padding: 0 6px; border-left: 3px solid var(--applied); }
+  .diff-pre .d-del { background: #ffebe9; color: #cf222e; display: block; padding: 0 6px; border-left: 3px solid var(--detected); text-decoration: line-through; }
+  .diff-pre .d-ctx { display: block; padding: 0 6px; color: var(--muted); }
+
+  .validation-section ul.vissue-list { list-style: none; padding: 0; margin: 8px 0; }
+  .vissue { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--validation);
+    border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; }
+  .vissue.v-error   { border-left-color: var(--detected); }
+  .vissue.v-warning { border-left-color: var(--skipped);  }
+  .vissue-head { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: 13px; }
+  .vissue-num { color: var(--muted); font-size: 12px; }
+  .vissue-rule { font-weight: 600; font-family: ui-monospace, monospace; }
+  .vissue-role { font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 999px;
+    background: var(--validation-bg); color: var(--validation); }
+  .vissue.v-error   .vissue-role { background: var(--detected-bg); color: var(--detected); }
+  .vissue.v-warning .vissue-role { background: var(--skipped-bg);  color: var(--skipped);  }
+  .vissue-topic { color: var(--muted); }
+  .vissue-msg { margin: 6px 0 4px; }
+  .vissue-loc { font-size: 12px; color: var(--muted); }
+
+  @media (max-width: 800px) {
+    .summary-grid { grid-template-columns: repeat(3, 1fr); }
+    .op-diff { grid-template-columns: 1fr; }
+    .diff-old { border-right: none; border-bottom: 1px solid var(--border); }
+    .op-meta { grid-template-columns: 1fr; }
+    .op-meta dt { margin-top: 6px; }
+  }
+</style>
+</head>
+<body>
+
+
+<header class="page-header">
+  <h1>DITA Parity Report</h1>
+  <div class="meta-line">
+    <span><b>Map:</b> <code>Comment_on_posts_and_reply_to_a_comment.ditamap</code></span>
+    <span><b>Article:</b> <code>https://www.linkedin.com/help/linkedin/answer/a524166</code></span>
+    <span><b>Generated:</b> 2026-06-10 16:41</span>
+  </div>
+</header>
+
+<section class="summary-grid"><div class="metric "><div class="value">8</div><div class="label">Topics</div></div>
+<div class="metric "><div class="value">38</div><div class="label">Source blocks</div></div>
+<div class="metric "><div class="value">40</div><div class="label">Article blocks</div></div>
+<div class="metric applied"><div class="value">7</div><div class="label">Applied</div></div>
+<div class="metric skipped"><div class="value">7</div><div class="label">Skipped</div></div>
+<div class="metric detected"><div class="value">5</div><div class="label">Detected</div></div>
+<div class="metric validation"><div class="value">2</div><div class="label">Validation issues</div></div>
+<div class="metric mapedit"><div class="value">1</div><div class="label">Map edits</div></div></section><div class="diff-line">Diff opcodes: <b>25</b> equal · <b>5</b> replace · <b>8</b> delete · <b>10</b> insert</div>
+<section class="files-section"><h2>Files written</h2><ul><li><a href="Notes.dita"><code>Notes.dita</code></a> <span class="muted">— C:\Users\parukala\Dita Parity AI\migration_assistant\output\runs\20260610_164146_271390\outputs</span></li></ul></section>
+<section class="changes-section"><h2>Track changes (1 file)</h2><p class="muted">Green = added in the patched output. Red = removed from the input. Lines without a marker are unchanged context.</p><details class="file-changes" open><summary>Notes.dita</summary><pre class="diff-pre"><span class="d-ctx">  &lt;concept id=&quot;ID-00000044&quot; xml:lang=&quot;en-US&quot;&gt;</span>
+<span class="d-del">-   &lt;title&gt;Notes:&lt;/title&gt;</span>
+<span class="d-ctx">    &lt;prolog&gt;</span>
+<span class="d-ctx">      &lt;critdates&gt;</span>
+<span class="d-ctx">        &lt;revised modified=&quot;&quot; expiry=&quot;&quot; /&gt;</span>
+<span class="d-ctx">      &lt;/critdates&gt;</span>
+<span class="d-ctx">      &lt;permissions view=&quot;&quot; /&gt;</span>
+<span class="d-ctx">      &lt;change-historylist&gt;</span>
+<span class="d-ctx">        &lt;change-item&gt;</span>
+<span class="d-ctx">          &lt;change-organization /&gt;</span>
+<span class="d-ctx">          &lt;change-request-reference&gt;</span>
+<span class="d-ctx">            &lt;change-request-id /&gt;</span>
+<span class="d-ctx">          &lt;/change-request-reference&gt;</span>
+<span class="d-ctx">          &lt;change-completed /&gt;</span>
+<span class="d-ctx">          &lt;change-summary /&gt;</span>
+<span class="d-ctx">        &lt;/change-item&gt;</span>
+<span class="d-ctx">      &lt;/change-historylist&gt;</span>
+<span class="d-ctx">      &lt;metadata&gt;</span>
+<span class="d-ctx">        &lt;audience type=&quot;&quot; job=&quot;&quot; name=&quot;NAME&quot; /&gt;</span>
+<span class="d-ctx">        &lt;contentType&gt;HC&lt;/contentType&gt;</span>
+<span class="d-ctx">        &lt;helpCenter&gt;LinkedIn HC&lt;/helpCenter&gt;</span>
+<span class="d-ctx">        &lt;userJourney /&gt;</span>
+<span class="d-ctx">        &lt;systemUsage /&gt;</span>
+<span class="d-ctx">        &lt;billing /&gt;</span>
+<span class="d-ctx">        &lt;informational /&gt;</span>
+<span class="d-ctx">        &lt;integrations /&gt;</span>
+<span class="d-ctx">        &lt;hc_tasks /&gt;</span>
+<span class="d-ctx">        &lt;hcDeliveryChannel&gt;Help Center&lt;/hcDeliveryChannel&gt;</span>
+<span class="d-ctx">        &lt;trust /&gt;</span>
+<span class="d-ctx">        &lt;keywords&gt;</span>
+<span class="d-ctx">          &lt;keyword /&gt;</span>
+<span class="d-ctx">        &lt;/keywords&gt;</span>
+<span class="d-ctx">        &lt;prodinfo&gt;</span>
+<span class="d-ctx">          &lt;prodname /&gt;</span>
+<span class="d-ctx">          &lt;LoB /&gt;</span>
+<span class="d-ctx">          &lt;feature&gt;Feed, Post&lt;/feature&gt;</span>
+<span class="d-ctx">          &lt;platform /&gt;</span>
+<span class="d-ctx">          &lt;subscriptionLevel /&gt;</span>
+<span class="d-ctx">          &lt;internalKeyword /&gt;</span>
+<span class="d-ctx">        &lt;/prodinfo&gt;</span>
+<span class="d-ctx">      &lt;/metadata&gt;</span>
+<span class="d-ctx">    &lt;/prolog&gt;</span>
+<span class="d-ctx">    &lt;conbody&gt;</span>
+<span class="d-del">-     &lt;ul&gt;</span>
+<span class="d-add">+     &lt;ul /&gt;</span>
+<span class="d-del">-       &lt;li&gt;Members and LinkedIn Pages can disable comments on their</span>
+<span class="d-del">-                                                 posts. This will prevent you from commenting.&lt;/li&gt;</span>
+<span class="d-del">-       &lt;li&gt;Members can limit commenting on their posts to connections</span>
+<span class="d-del">-                                                 only. This will prevent you from commenting if you</span>
+<span class="d-del">-                                                 aren&#x27;t their 1st-degree connection.&lt;/li&gt;</span>
+<span class="d-del">-       &lt;li&gt;LinkedIn Pages can allow or restrict comments on their Page</span>
+<span class="d-del">-                                                 posts from all LinkedIn members.&lt;/li&gt;</span>
+<span class="d-del">-       &lt;li&gt;Members can block members and LinkedIn Pages from commenting</span>
+<span class="d-del">-                                                 on their posts.&lt;/li&gt;</span>
+<span class="d-del">-       &lt;li&gt;When a member or a LinkedIn Page comments on their own post,</span>
+<span class="d-del">-                                                 an &lt;em&gt;Author&lt;/em&gt; tag is displayed next to the</span>
+<span class="d-del">-                                                 name.&lt;/li&gt;</span>
+<span class="d-del">-       &lt;li&gt;To keep LinkedIn safe and professional, we may limit how</span>
+<span class="d-del">-                                                 many comments a member or a LinkedIn Page can make</span>
+<span class="d-del">-                                                 in a certain time period. Similarly, if we detect</span>
+<span class="d-del">-                                                 excessive comment creation or use of an automation</span>
+<span class="d-del">-                                                 tool, we may limit the visibility of those comments.</span>
+<span class="d-del">-                                                 Verifying your Page, and ensuring that you and the</span>
+<span class="d-del">-                                                 other admins of your Page have added a workplace or</span>
+<span class="d-del">-                                                 identity verification to your member accounts can</span>
+<span class="d-del">-                                                 help you optimize your Page&#x27;s content creation and</span>
+<span class="d-del">-                                                 visibility.&lt;/li&gt;</span>
+<span class="d-del">-     &lt;/ul&gt;</span>
+<span class="d-ctx">    &lt;/conbody&gt;</span>
+<span class="d-ctx">  &lt;/concept&gt;</span></pre></details></section>
+<section class="validation-section"><h2>Schematron validation</h2><p>Ran against <code>kms_global_rules.sch</code>: <b>2</b> issues (1 error · 1 warning · 0 info)</p><ul class="vissue-list"><li class="vissue v-warning"><div class="vissue-head"><span class="vissue-num">#1</span> <span class="vissue-rule">IM_list01</span> <span class="vissue-role">WARNING</span> <code class="vissue-topic">Notes.dita</code></div><div class="vissue-msg">IM_list01: Do not include a single item list.</div><div class="vissue-loc"><b>at</b> <code>/concept/conbody/ul</code></div></li><li class="vissue v-error"><div class="vissue-head"><span class="vissue-num">#2</span> <span class="vissue-rule">IM_shortdesc02</span> <span class="vissue-role">ERROR</span> <code class="vissue-topic">Notes.dita</code></div><div class="vissue-msg">IM_shortdesc02: A short description is strongly recommended.</div><div class="vissue-loc"><b>at</b> <code>/concept</code></div></li></ul></section>
+<div class="topic-filter"><label for="topic-select">Filter by topic:</label> <select id="topic-select"><option value="">All topics</option><option value="Comment_on_posts_and_reply_to_a_comment.dita">Comment_on_posts_and_reply_to_a_comment.dita</option><option value="Notes.dita">Notes.dita</option><option value="Notes1.dita">Notes1.dita</option><option value="Desktop.dita">Desktop.dita</option><option value="To_reply_to_a_comment.dita">To_reply_to_a_comment.dita</option><option value="Mobile.dita">Mobile.dita</option><option value="To_reply_to_a_comment1.dita">To_reply_to_a_comment1.dita</option><option value="post-tab_content.dita">post-tab_content.dita</option></select></div>
+
+<nav class="tabs" role="tablist">
+  <button data-tab="all" class="active">All (20)</button>
+  <button data-tab="applied">✓ Applied (7)</button>
+  <button data-tab="skipped">⏸ Skipped (7)</button>
+  <button data-tab="detected">⚠ Detected (5)</button>
+  <button data-tab="map_edit">🗺 Map edits (1)</button>
+</nav>
+
+<section class="op-list">
+<article class="op op-skipped" data-category="skipped" data-topic="&lt;ditamap&gt;">
+  <header class="op-header">
+    <span class="op-num">#1</span>
+    <span class="op-icon">⏸</span>
+    <span class="op-kind">INSERT</span>
+    <code class="op-location">after &lt;ditamap&gt; :: &lt;topichead navtitle=&#x27;Desktop&#x27;&gt;</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old muted"><label>—</label><pre>(no source block; INSERT)</pre></div><div class="diff-side diff-new"><label>New text (article)</label><pre>Mobile</pre></div></div>
+  <dl class="op-meta"><dt>Anchor topic</dt><dd>&lt;ditamap&gt;</dd><dt>Anchor xpath</dt><dd>&lt;topichead navtitle=&#x27;Desktop&#x27;&gt;</dd><dt>Reason</dt><dd>this heading lives in the .ditamap (&lt;topichead&gt;/&lt;topicgroup&gt;/&lt;navtitle&gt;), not in a topic body; edit the map directly</dd></dl>
+  
+</article>
+
+
+<article class="op op-skipped" data-category="skipped" data-topic="Desktop.dita">
+  <header class="op-header">
+    <span class="op-num">#2</span>
+    <span class="op-icon">⏸</span>
+    <span class="op-kind">REPLACE</span>
+    <code class="op-location">Desktop.dita :: /task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>Click the Emoji icon to add an emoji or click the
+                           
+                        Photo icon to attach a photo.</pre></div><div class="diff-side diff-new"><label>New text (article)</label><pre>Optional: Type @ to mention someone in your comment. Click the Emoji icon to add an emoji, the icon to select a GIF, or the Image icon to attach a photo.</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>Desktop.dita</dd><dt>Element</dt><dd>&lt;note&gt;</dd><dt>Xpath</dt><dd>/task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</dd><dt>Note type</dt><dd>tip</dd><dt>Reason</dt><dd>structural element &lt;note&gt; with nested paragraphs/lists — the article&#x27;s callout collapses these into one block; not safe to split a single edit back across child &lt;p&gt; elements</dd></dl>
+  
+</article>
+
+
+<article class="op op-detected" data-category="detected" data-topic="Desktop.dita">
+  <header class="op-header">
+    <span class="op-num">#3</span>
+    <span class="op-icon">⚠</span>
+    <span class="op-kind">REPLACE</span>
+    <code class="op-location">Desktop.dita :: /task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>Click the Emoji icon to add an emoji or click the
+                           
+                        Photo icon to attach a photo.</pre></div><div class="diff-side diff-new"><label>New text (article)</label><pre>Optional: Type @ to mention someone in your comment. Click the Emoji icon to add an emoji, the icon to select a GIF, or the Image icon to attach a photo.</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>Desktop.dita</dd><dt>Element</dt><dd>&lt;note&gt;</dd><dt>Xpath</dt><dd>/task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</dd><dt>Note type</dt><dd>tip</dd><dt>Reason</dt><dd>the original REPLACE was refused for safety reasons (see the SKIPPED entry above); the new article text is surfaced here so it isn&#x27;t lost — place it manually near Desktop.dita::/task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</dd></dl>
+  
+</article>
+
+
+<article class="op op-skipped" data-category="skipped" data-topic="To_reply_to_a_comment.dita">
+  <header class="op-header">
+    <span class="op-num">#4</span>
+    <span class="op-icon">⏸</span>
+    <span class="op-kind">REPLACE</span>
+    <code class="op-location">To_reply_to_a_comment.dita :: /task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>Click the  Emoji icon to add an emoji or click the  
+                        Photo icon to attach a photo.</pre></div><div class="diff-side diff-new"><label>New text (article)</label><pre>Optional: Type @ to mention someone in your comment. Click the Emoji icon to add an emoji, the icon to select a GIF, or the Image icon to attach a photo.</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>To_reply_to_a_comment.dita</dd><dt>Element</dt><dd>&lt;note&gt;</dd><dt>Xpath</dt><dd>/task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</dd><dt>Note type</dt><dd>tip</dd><dt>Reason</dt><dd>structural element &lt;note&gt; with nested paragraphs/lists — the article&#x27;s callout collapses these into one block; not safe to split a single edit back across child &lt;p&gt; elements</dd></dl>
+  
+</article>
+
+
+<article class="op op-detected" data-category="detected" data-topic="To_reply_to_a_comment.dita">
+  <header class="op-header">
+    <span class="op-num">#5</span>
+    <span class="op-icon">⚠</span>
+    <span class="op-kind">REPLACE</span>
+    <code class="op-location">To_reply_to_a_comment.dita :: /task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>Click the  Emoji icon to add an emoji or click the  
+                        Photo icon to attach a photo.</pre></div><div class="diff-side diff-new"><label>New text (article)</label><pre>Optional: Type @ to mention someone in your comment. Click the Emoji icon to add an emoji, the icon to select a GIF, or the Image icon to attach a photo.</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>To_reply_to_a_comment.dita</dd><dt>Element</dt><dd>&lt;note&gt;</dd><dt>Xpath</dt><dd>/task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</dd><dt>Note type</dt><dd>tip</dd><dt>Reason</dt><dd>the original REPLACE was refused for safety reasons (see the SKIPPED entry above); the new article text is surfaced here so it isn&#x27;t lost — place it manually near To_reply_to_a_comment.dita::/task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</dd></dl>
+  
+</article>
+
+
+<article class="op op-skipped" data-category="skipped" data-topic="&lt;ditamap&gt;">
+  <header class="op-header">
+    <span class="op-num">#6</span>
+    <span class="op-icon">⏸</span>
+    <span class="op-kind">DELETE</span>
+    <code class="op-location">&lt;ditamap&gt; :: &lt;topichead navtitle=&#x27;Mobile&#x27;&gt;</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>Mobile</pre></div><div class="diff-side diff-new muted"><label>—</label><pre>(no new text; DELETE)</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>&lt;ditamap&gt;</dd><dt>Element</dt><dd>&lt;navtitle&gt;</dd><dt>Xpath</dt><dd>&lt;topichead navtitle=&#x27;Mobile&#x27;&gt;</dd><dt>Reason</dt><dd>this heading lives in the .ditamap (&lt;topichead&gt;/&lt;topicgroup&gt;/&lt;navtitle&gt;), not in a topic body; edit the map directly</dd></dl>
+  
+</article>
+
+
+<article class="op op-skipped" data-category="skipped" data-topic="Mobile.dita">
+  <header class="op-header">
+    <span class="op-num">#7</span>
+    <span class="op-icon">⏸</span>
+    <span class="op-kind">REPLACE</span>
+    <code class="op-location">Mobile.dita :: /task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>Tap @ to mention someone in your comment or tap the   Camera icon to add a photo.</pre></div><div class="diff-side diff-new"><label>New text (article)</label><pre>Optional: Tap @ to mention someone in your comment, tap the icon to select a Gif, or tap the Image icon to add a photo.</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>Mobile.dita</dd><dt>Element</dt><dd>&lt;note&gt;</dd><dt>Xpath</dt><dd>/task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</dd><dt>Note type</dt><dd>tip</dd><dt>Reason</dt><dd>structural element &lt;note&gt; with nested paragraphs/lists — the article&#x27;s callout collapses these into one block; not safe to split a single edit back across child &lt;p&gt; elements</dd></dl>
+  
+</article>
+
+
+<article class="op op-detected" data-category="detected" data-topic="Mobile.dita">
+  <header class="op-header">
+    <span class="op-num">#8</span>
+    <span class="op-icon">⚠</span>
+    <span class="op-kind">REPLACE</span>
+    <code class="op-location">Mobile.dita :: /task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>Tap @ to mention someone in your comment or tap the   Camera icon to add a photo.</pre></div><div class="diff-side diff-new"><label>New text (article)</label><pre>Optional: Tap @ to mention someone in your comment, tap the icon to select a Gif, or tap the Image icon to add a photo.</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>Mobile.dita</dd><dt>Element</dt><dd>&lt;note&gt;</dd><dt>Xpath</dt><dd>/task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</dd><dt>Note type</dt><dd>tip</dd><dt>Reason</dt><dd>the original REPLACE was refused for safety reasons (see the SKIPPED entry above); the new article text is surfaced here so it isn&#x27;t lost — place it manually near Mobile.dita::/task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</dd></dl>
+  
+</article>
+
+
+<article class="op op-skipped" data-category="skipped" data-topic="To_reply_to_a_comment1.dita">
+  <header class="op-header">
+    <span class="op-num">#9</span>
+    <span class="op-icon">⏸</span>
+    <span class="op-kind">REPLACE</span>
+    <code class="op-location">To_reply_to_a_comment1.dita :: /task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>Tap @ to mention someone in your reply or tap the   Camera icon to add a photo.</pre></div><div class="diff-side diff-new"><label>New text (article)</label><pre>Optional: Tap @ to mention someone in your comment, tap the icon to select a Gif, or tap the Image icon to add a photo.</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>To_reply_to_a_comment1.dita</dd><dt>Element</dt><dd>&lt;note&gt;</dd><dt>Xpath</dt><dd>/task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</dd><dt>Note type</dt><dd>tip</dd><dt>Reason</dt><dd>structural element &lt;note&gt; with nested paragraphs/lists — the article&#x27;s callout collapses these into one block; not safe to split a single edit back across child &lt;p&gt; elements</dd></dl>
+  
+</article>
+
+
+<article class="op op-detected" data-category="detected" data-topic="To_reply_to_a_comment1.dita">
+  <header class="op-header">
+    <span class="op-num">#10</span>
+    <span class="op-icon">⚠</span>
+    <span class="op-kind">REPLACE</span>
+    <code class="op-location">To_reply_to_a_comment1.dita :: /task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>Tap @ to mention someone in your reply or tap the   Camera icon to add a photo.</pre></div><div class="diff-side diff-new"><label>New text (article)</label><pre>Optional: Tap @ to mention someone in your comment, tap the icon to select a Gif, or tap the Image icon to add a photo.</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>To_reply_to_a_comment1.dita</dd><dt>Element</dt><dd>&lt;note&gt;</dd><dt>Xpath</dt><dd>/task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</dd><dt>Note type</dt><dd>tip</dd><dt>Reason</dt><dd>the original REPLACE was refused for safety reasons (see the SKIPPED entry above); the new article text is surfaced here so it isn&#x27;t lost — place it manually near To_reply_to_a_comment1.dita::/task/taskbody[1]/steps[1]/step[2]/info[1]/note[1]</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="Notes.dita">
+  <header class="op-header">
+    <span class="op-num">#11</span>
+    <span class="op-icon">✓</span>
+    <span class="op-kind">DELETE</span>
+    <code class="op-location">Notes.dita :: /concept/conbody[1]/ul[1]/li[6]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>To keep LinkedIn safe and professional, we may limit how
+                                                many comments a member or a LinkedIn Page can make
+                                                in a certain time period. Similarly, if we detect
+                                                excessive comment creation or use of an automation
+                                                tool, we may limit the visibility of those comments.
+                                                Verifying your Page, and ensuring that you and the
+                                                other admins of your Page have added a workplace or
+                                                identity verification to your member accounts can
+                                                help you optimize your Page&#x27;s content creation and
+                                                visibility.</pre></div><div class="diff-side diff-new muted"><label>—</label><pre>(no new text; DELETE)</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>Notes.dita</dd><dt>Element</dt><dd>&lt;li&gt;</dd><dt>Xpath</dt><dd>/concept/conbody[1]/ul[1]/li[6]</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="Notes.dita">
+  <header class="op-header">
+    <span class="op-num">#12</span>
+    <span class="op-icon">✓</span>
+    <span class="op-kind">DELETE</span>
+    <code class="op-location">Notes.dita :: /concept/conbody[1]/ul[1]/li[5]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>When a member or a LinkedIn Page comments on their own post,
+                                                an Author tag is displayed next to the
+                                                name.</pre></div><div class="diff-side diff-new muted"><label>—</label><pre>(no new text; DELETE)</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>Notes.dita</dd><dt>Element</dt><dd>&lt;li&gt;</dd><dt>Xpath</dt><dd>/concept/conbody[1]/ul[1]/li[5]</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="Notes.dita">
+  <header class="op-header">
+    <span class="op-num">#13</span>
+    <span class="op-icon">✓</span>
+    <span class="op-kind">DELETE</span>
+    <code class="op-location">Notes.dita :: /concept/conbody[1]/ul[1]/li[4]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>Members can block members and LinkedIn Pages from commenting
+                                                on their posts.</pre></div><div class="diff-side diff-new muted"><label>—</label><pre>(no new text; DELETE)</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>Notes.dita</dd><dt>Element</dt><dd>&lt;li&gt;</dd><dt>Xpath</dt><dd>/concept/conbody[1]/ul[1]/li[4]</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="Notes.dita">
+  <header class="op-header">
+    <span class="op-num">#14</span>
+    <span class="op-icon">✓</span>
+    <span class="op-kind">DELETE</span>
+    <code class="op-location">Notes.dita :: /concept/conbody[1]/ul[1]/li[3]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>LinkedIn Pages can allow or restrict comments on their Page
+                                                posts from all LinkedIn members.</pre></div><div class="diff-side diff-new muted"><label>—</label><pre>(no new text; DELETE)</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>Notes.dita</dd><dt>Element</dt><dd>&lt;li&gt;</dd><dt>Xpath</dt><dd>/concept/conbody[1]/ul[1]/li[3]</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="Notes.dita">
+  <header class="op-header">
+    <span class="op-num">#15</span>
+    <span class="op-icon">✓</span>
+    <span class="op-kind">DELETE</span>
+    <code class="op-location">Notes.dita :: /concept/conbody[1]/ul[1]/li[2]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>Members can limit commenting on their posts to connections
+                                                only. This will prevent you from commenting if you
+                                                aren&#x27;t their 1st-degree connection.</pre></div><div class="diff-side diff-new muted"><label>—</label><pre>(no new text; DELETE)</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>Notes.dita</dd><dt>Element</dt><dd>&lt;li&gt;</dd><dt>Xpath</dt><dd>/concept/conbody[1]/ul[1]/li[2]</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="Notes.dita">
+  <header class="op-header">
+    <span class="op-num">#16</span>
+    <span class="op-icon">✓</span>
+    <span class="op-kind">DELETE</span>
+    <code class="op-location">Notes.dita :: /concept/conbody[1]/ul[1]/li[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>Members and LinkedIn Pages can disable comments on their
+                                                posts. This will prevent you from commenting.</pre></div><div class="diff-side diff-new muted"><label>—</label><pre>(no new text; DELETE)</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>Notes.dita</dd><dt>Element</dt><dd>&lt;li&gt;</dd><dt>Xpath</dt><dd>/concept/conbody[1]/ul[1]/li[1]</dd></dl>
+  
+</article>
+
+
+<article class="op op-applied" data-category="applied" data-topic="Notes.dita">
+  <header class="op-header">
+    <span class="op-num">#17</span>
+    <span class="op-icon">✓</span>
+    <span class="op-kind">DELETE</span>
+    <code class="op-location">Notes.dita :: /concept/title[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>Notes:</pre></div><div class="diff-side diff-new muted"><label>—</label><pre>(no new text; DELETE)</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>Notes.dita</dd><dt>Element</dt><dd>&lt;title&gt;</dd><dt>Xpath</dt><dd>/concept/title[1]</dd></dl>
+  
+</article>
+
+
+<article class="op op-skipped" data-category="skipped" data-topic="Mobile.dita">
+  <header class="op-header">
+    <span class="op-num">#18</span>
+    <span class="op-icon">⏸</span>
+    <span class="op-kind">REPLACE</span>
+    <code class="op-location">Mobile.dita :: /task/taskbody[1]/steps[1]/step[3]/cmd[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>Tap Comment.</pre></div><div class="diff-side diff-new"><label>New text (article)</label><pre>Tap Reply.</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>Mobile.dita</dd><dt>Element</dt><dd>&lt;cmd&gt;</dd><dt>Xpath</dt><dd>/task/taskbody[1]/steps[1]/step[3]/cmd[1]</dd><dt>Reason</dt><dd>source element contains inline markup (&lt;xref&gt;/&lt;uicontrol&gt;/&lt;keyword&gt; etc.) that the article&#x27;s plain-text update would discard; review manually to decide what to keep</dd></dl>
+  
+</article>
+
+
+<article class="op op-detected" data-category="detected" data-topic="Mobile.dita">
+  <header class="op-header">
+    <span class="op-num">#19</span>
+    <span class="op-icon">⚠</span>
+    <span class="op-kind">REPLACE</span>
+    <code class="op-location">Mobile.dita :: /task/taskbody[1]/steps[1]/step[3]/cmd[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old"><label>Old text (DITA)</label><pre>Tap Comment.</pre></div><div class="diff-side diff-new"><label>New text (article)</label><pre>Tap Reply.</pre></div></div>
+  <dl class="op-meta"><dt>Topic</dt><dd>Mobile.dita</dd><dt>Element</dt><dd>&lt;cmd&gt;</dd><dt>Xpath</dt><dd>/task/taskbody[1]/steps[1]/step[3]/cmd[1]</dd><dt>Reason</dt><dd>the original REPLACE was refused for safety reasons (see the SKIPPED entry above); the new article text is surfaced here so it isn&#x27;t lost — place it manually near Mobile.dita::/task/taskbody[1]/steps[1]/step[3]/cmd[1]</dd></dl>
+  
+</article>
+
+
+<article class="op op-mapedit" data-category="mapedit" data-topic="post-tab_content.dita">
+  <header class="op-header">
+    <span class="op-num">#20</span>
+    <span class="op-icon">🗺</span>
+    <span class="op-kind">INSERT</span>
+    <code class="op-location">after post-tab_content.dita :: /concept/conbody[1]/p[1]</code>
+  </header>
+  <div class="op-diff"><div class="diff-side diff-old muted"><label>—</label><pre>(no source block; INSERT)</pre></div><div class="diff-side diff-new"><label>New text (article)</label><pre>Related tasks</pre></div></div>
+  <dl class="op-meta"><dt>Anchor topic</dt><dd>post-tab_content.dita</dd><dt>Anchor xpath</dt><dd>/concept/conbody[1]/p[1]</dd><dt>Reason</dt><dd>Review the &lt;reltable&gt; in your .ditamap. The article has a Learn more / Related tasks section; make sure the corresponding &lt;relcell&gt; entries match.</dd></dl>
+  
+</article>
+</section>
+<section class="topic-outline"><h2>Topic outline (publication order)</h2><ol><li><code>Comment_on_posts_and_reply_to_a_comment.dita</code> <span class="muted">— 2 block(s), depth 0, map position 0</span></li><li><code>Notes.dita</code> <span class="muted">— 7 block(s), depth 1, map position 1</span></li><li><code>Notes1.dita</code> <span class="muted">— 6 block(s), depth 1, map position 2</span></li><li><code>Desktop.dita</code> <span class="muted">— 5 block(s), depth 3, map position 4</span></li><li><code>To_reply_to_a_comment.dita</code> <span class="muted">— 5 block(s), depth 4, map position 5</span></li><li><code>Mobile.dita</code> <span class="muted">— 5 block(s), depth 3, map position 7</span></li><li><code>To_reply_to_a_comment1.dita</code> <span class="muted">— 5 block(s), depth 4, map position 8</span></li><li><code>post-tab_content.dita</code> <span class="muted">— 1 block(s), depth 1, map position 9</span></li></ol></section>
+
+<script>
+(function () {
+  const tabs = document.querySelectorAll('.tabs button');
+  const ops = document.querySelectorAll('.op');
+  const topicSelect = document.getElementById('topic-select');
+  let activeTab = 'all';
+  let activeTopic = '';
+
+  function applyFilters() {
+    ops.forEach(op => {
+      const matchTab = activeTab === 'all' || op.dataset.category === activeTab;
+      const matchTopic = !activeTopic || op.dataset.topic === activeTopic;
+      op.style.display = (matchTab && matchTopic) ? '' : 'none';
+    });
+  }
+
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeTab = btn.dataset.tab;
+      applyFilters();
+    });
+  });
+
+  if (topicSelect) {
+    topicSelect.addEventListener('change', () => {
+      activeTopic = topicSelect.value;
+      applyFilters();
+    });
+  }
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,344 @@
+========================================================================
+DITA PARITY PATCH REPORT
+========================================================================
+Total ops processed:    30
+Applied:                21
+Skipped (safety):       8
+Detected (manual):      0
+Map edits (reltable):   1
+Applied with warnings:  0
+Files written:          3
+  - C:\Users\parukala\Dita Parity AI\migration_assistant\output\runs\20260610_145635_0180db\outputs\Personalize_invitations_to_connect.dita
+  - C:\Users\parukala\Dita Parity AI\migration_assistant\output\runs\20260610_145635_0180db\outputs\Mobile.dita
+  - C:\Users\parukala\Dita Parity AI\migration_assistant\output\runs\20260610_145635_0180db\outputs\post-tab_content.dita
+
+------------------------------------------------------------------------
+APPLIED  (auto-patched into output/)
+------------------------------------------------------------------------
+[APPLIED #1]
+  operation:   REPLACE
+  topic file:  Personalize_invitations_to_connect.dita
+  xpath:       /concept/conbody[1]/p[1]
+  old text:    'When inviting members to connect, you can add a personalized message for up to three of the connection requests that you send each month, each with a character limit of 200.'
+  new text:    'Adding a short, thoughtful message to your connection request helps you explain who you are and why you’re reaching out. This can help the recipient decide whether to accept your request.'
+
+[APPLIED #2]
+  operation:   INSERT
+  anchor:      after Personalize_invitations_to_connect.dita::/concept/conbody[1]/note[1]
+  new text:    'Add a personalized message to a connection invitation'
+
+[APPLIED #3]
+  operation:   INSERT
+  anchor:      after Personalize_invitations_to_connect.dita::/concept/conbody[1]/note[1]
+  new text:    'For example, you might reference a shared role, event, group, or post you found helpful. This helps the recipient quickly understand the context of your request.'
+
+[APPLIED #4]
+  operation:   INSERT
+  anchor:      after Personalize_invitations_to_connect.dita::/concept/conbody[1]/note[1]
+  new text:    'A clear and polite tone'
+
+[APPLIED #5]
+  operation:   INSERT
+  anchor:      after Personalize_invitations_to_connect.dita::/concept/conbody[1]/note[1]
+  new text:    'Why you’d like to connect now'
+
+[APPLIED #6]
+  operation:   INSERT
+  anchor:      after Personalize_invitations_to_connect.dita::/concept/conbody[1]/note[1]
+  new text:    'How you found the person or what you have in common'
+
+[APPLIED #7]
+  operation:   INSERT
+  anchor:      after Personalize_invitations_to_connect.dita::/concept/conbody[1]/note[1]
+  new text:    'Keep your message short and specific. A good personalized invitation usually includes:'
+
+[APPLIED #8]
+  operation:   INSERT
+  anchor:      after Personalize_invitations_to_connect.dita::/concept/conbody[1]/note[1]
+  new text:    'What to include in your message'
+
+[APPLIED #9]
+  operation:   INSERT
+  anchor:      after Personalize_invitations_to_connect.dita::/concept/conbody[1]/note[1]
+  new text:    'This is especially useful if you’re growing your network, exploring new roles, or reconnecting with people outside your immediate circle.'
+
+[APPLIED #10]
+  operation:   INSERT
+  anchor:      after Personalize_invitations_to_connect.dita::/concept/conbody[1]/note[1]
+  new text:    'Why personalize a connection invitation'
+
+[APPLIED #11]
+  operation:   INSERT
+  anchor:      after Personalize_invitations_to_connect.dita::/concept/conbody[1]/note[1]
+  new text:    'LinkedIn Premium members can send unlimited personalized invitations to all their connection requests (connection request limits may still apply)'
+
+[APPLIED #12]
+  operation:   INSERT
+  anchor:      after Personalize_invitations_to_connect.dita::/concept/conbody[1]/note[1]
+  new text:    'Each message can be up to 200 characters'
+
+[APPLIED #13]
+  operation:   INSERT
+  anchor:      after Personalize_invitations_to_connect.dita::/concept/conbody[1]/note[1]
+  new text:    'You can add a personalized message to up to three connection requests per month'
+
+[APPLIED #14]
+  operation:   INSERT
+  anchor:      after Personalize_invitations_to_connect.dita::/concept/conbody[1]/note[1]
+  new text:    'Invitation limits'
+
+[APPLIED #15]
+  operation:   INSERT
+  anchor:      after Personalize_invitations_to_connect.dita::/concept/conbody[1]/note[1]
+  new text:    'Stand out from generic requests'
+
+[APPLIED #16]
+  operation:   INSERT
+  anchor:      after Personalize_invitations_to_connect.dita::/concept/conbody[1]/note[1]
+  new text:    'Build trust when connecting with someone you don’t know yet'
+
+[APPLIED #17]
+  operation:   INSERT
+  anchor:      after Personalize_invitations_to_connect.dita::/concept/conbody[1]/note[1]
+  new text:    'Explain who you are and why you’re reaching out'
+
+[APPLIED #18]
+  operation:   INSERT
+  anchor:      after Mobile.dita::/task/taskbody[1]/result[1]/note[1]
+  new text:    'If the recipient replies to your message or accepts your invitation, the conversation appears in your messages.'
+
+[APPLIED #19]
+  operation:   REPLACE
+  topic file:  post-tab_content.dita
+  xpath:       /concept/conbody[1]/ul[1]/li[3]
+  old text:    "Invitations sent from the People You May Know feature in the LinkedIn mobile app can't be personalized."
+  new text:    'Invitations sent from People You May Know on the LinkedIn mobile app can’t be personalized.'
+
+[APPLIED #20]
+  operation:   REPLACE
+  topic file:  post-tab_content.dita
+  xpath:       /concept/conbody[1]/ul[1]/li[5]
+  old text:    'If the recipient responds to your custom message or accepts your invite, a new message thread will appear in your Inbox. A response can be sent without accepting your invitation.'
+  new text:    'If the recipient responds to your message, they can reply without accepting your invitation.'
+
+[APPLIED #21]
+  operation:   INSERT
+  anchor:      after post-tab_content.dita::/concept/conbody[1]/ul[1]/li[5]
+  new text:    'These limits help ensure outreach remains thoughtful and relevant.'
+
+------------------------------------------------------------------------
+SKIPPED  (auto-patch refused for safety / structural reasons)
+------------------------------------------------------------------------
+[SKIPPED #1]
+  operation:   REPLACE
+  topic file:  Personalize_invitations_to_connect.dita
+  xpath:       /concept/conbody[1]/note[1]
+  old text:    'With a LinkedIn Premium membership, you have no limit on the number of personalized messages you can add to the connection requests you send.'
+  new text:    'Adding a message helps you:'
+  reason:      structural element <note> with nested paragraphs/lists — the article's callout collapses these into one block; not safe to split a single edit back across child <p> elements
+
+[SKIPPED #2]
+  operation:   INSERT
+  anchor:      after <ditamap>::<topichead navtitle='Desktop'>
+  new text:    'Mobile'
+  reason:      this heading lives in the .ditamap (<topichead>/<topicgroup>/<navtitle>), not in a topic body; edit the map directly
+
+[SKIPPED #3]
+  operation:   REPLACE
+  topic file:  Desktop.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[4]/info[1]/note[1]
+  old text:    'LinkedIn Premium subscribers can use AI Writing Assistant to send a message.'
+  new text:    'Select Send invitation.'
+  reason:      alignment ambiguity: 3 source block(s) vs 1 article block(s) in this region — review manually
+
+[SKIPPED #4]
+  operation:   DELETE
+  topic file:  Desktop.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[5]/cmd[1]
+  old text:    'Click Send invitation.'
+  reason:      alignment ambiguity: 3 source block(s) vs 1 article block(s) in this region — review manually
+
+[SKIPPED #5]
+  operation:   DELETE
+  topic file:  <ditamap>
+  xpath:       <topichead navtitle='Mobile'>
+  old text:    'Mobile'
+  reason:      alignment ambiguity: 3 source block(s) vs 1 article block(s) in this region — review manually
+
+[SKIPPED #6]
+  operation:   DELETE
+  topic file:  Mobile.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[4]/info[1]/note[1]
+  old text:    'LinkedIn Premium subscribers can use AI Writing Assistant to send a message.'
+  reason:      structural element <note> with nested paragraphs/lists — the article's callout collapses these into one block; not safe to split a single edit back across child <p> elements
+
+[SKIPPED #7]
+  operation:   REPLACE
+  topic file:  Desktop.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[2]/cmd[1]
+  old text:    'Click the Connect button located in the introduction section.'
+  new text:    'Select Connect in the introduction section.'
+  reason:      source element contains inline markup (<xref>/<uicontrol>/<keyword> etc.) that the article's plain-text update would discard; review manually to decide what to keep
+
+[SKIPPED #8]
+  operation:   REPLACE
+  topic file:  post-tab_content.dita
+  xpath:       /concept/conbody[1]/ul[1]/li[2]
+  old text:    "You will be asked How do you know [member name]? when you send a connection\n            request. And if you select the option We don't know each other,\n            you'll be prompted to send them a message first, to establish a relationship. This could\n            even mean sending them an InMail message based on their messaging settings."
+  new text:    'When you select We don’t know each other, you may be prompted to send a message before the invitation is sent.'
+  reason:      source element contains inline markup (<xref>/<uicontrol>/<keyword> etc.) that the article's plain-text update would discard; review manually to decide what to keep
+
+------------------------------------------------------------------------
+MAP EDITS  (content belongs in the .ditamap reltable, not topic bodies)
+------------------------------------------------------------------------
+[MAP EDIT #1]
+  operation:   INSERT
+  anchor:      after post-tab_content.dita::/concept/conbody[1]/ul[1]/li[5]
+  new text:    'Related tasks'
+  reason:      Review the <reltable> in your .ditamap. The article has a Learn more / Related tasks section; make sure the corresponding <relcell> entries match.
+
+------------------------------------------------------------------------
+SCHEMATRON VALIDATION
+------------------------------------------------------------------------
+Ran against kms_global_rules.sch: 20 issues (20 error, 0 warning, 0 info)
+
+[VALIDATION #1]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept/conbody/note[2]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #2]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept/conbody/note[3]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #3]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept/conbody/note[4]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #4]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept/conbody/note[5]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #5]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept/conbody/note[6]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #6]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept/conbody/note[7]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #7]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept/conbody/note[8]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #8]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept/conbody/note[9]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #9]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept/conbody/note[10]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #10]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept/conbody/note[11]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #11]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept/conbody/note[12]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #12]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept/conbody/note[13]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #13]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept/conbody/note[14]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #14]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept/conbody/note[15]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #15]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept/conbody/note[16]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #16]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept/conbody/note[17]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #17]
+  rule:        IM_shortdesc02
+  severity:    ERROR
+  topic file:  Personalize_invitations_to_connect.dita
+  location:    /concept
+  message:     IM_shortdesc02: A short description is strongly recommended.
+
+[VALIDATION #18]
+  rule:        IM_note01
+  severity:    ERROR
+  topic file:  Mobile.dita
+  location:    /task/taskbody/result/note[2]
+  message:     IM_note01: Use only the following values for note type: feature, important, note, pdf, role, or tip.
+
+[VALIDATION #19]
+  rule:        IM_shortdesc02
+  severity:    ERROR
+  topic file:  Mobile.dita
+  location:    /task
+  message:     IM_shortdesc02: A short description is strongly recommended.
+
+[VALIDATION #20]
+  rule:        IM_shortdesc02
+  severity:    ERROR
+  topic file:  post-tab_content.dita
+  location:    /concept
+  message:     IM_shortdesc02: A short description is strongly recommended.
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//LINKEDIN//DTD DITA Concept//EN" "linkedin_concept.dtd">
+<concept id="ID-00000044" xml:lang="en-US"><title>Notes:</title><prolog><critdates><revised modified="" expiry=""/></critdates><permissions view=""/><change-historylist><change-item><change-organization/><change-request-reference><change-request-id/></change-request-reference><change-completed/><change-summary/></change-item></change-historylist><metadata><audience type="" job="" name="NAME"/><contentType>HC</contentType><helpCenter>LinkedIn HC</helpCenter><userJourney/><systemUsage/><billing/><informational/><integrations/><hc_tasks/><hcDeliveryChannel>Help Center</hcDeliveryChannel><trust/><keywords><keyword/></keywords><prodinfo><prodname/><LoB/><feature>Feed, Post</feature><platform/><subscriptionLevel/><internalKeyword/></prodinfo></metadata></prolog><conbody><ul><li>Members and LinkedIn Pages can disable comments on their
+                                                posts. This will prevent you from commenting.</li><li>Members can limit commenting on their posts to connections
+                                                only. This will prevent you from commenting if you
+                                                aren't their 1st-degree connection.</li><li>LinkedIn Pages can allow or restrict comments on their Page
+                                                posts from all LinkedIn members.</li><li>Members can block members and LinkedIn Pages from commenting
+                                                on their posts.</li><li>When a member or a LinkedIn Page comments on their own post,
+                                                an <em>Author</em> tag is displayed next to the
+                                                name.</li><li>To keep LinkedIn safe and professional, we may limit how
+                                                many comments a member or a LinkedIn Page can make
+                                                in a certain time period. Similarly, if we detect
+                                                excessive comment creation or use of an automation
+                                                tool, we may limit the visibility of those comments.
+                                                Verifying your Page, and ensuring that you and the
+                                                other admins of your Page have added a workplace or
+                                                identity verification to your member accounts can
+                                                help you optimize your Page's content creation and
+                                                visibility.</li></ul></conbody></concept>

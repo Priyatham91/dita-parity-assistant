@@ -1,0 +1,107 @@
+========================================================================
+DITA PARITY PATCH REPORT
+========================================================================
+Total ops processed:    9
+Applied:                2
+Skipped (safety):       4
+Detected (manual):      2
+Map edits (reltable):   1
+Applied with warnings:  0
+Files written:          1
+  - C:\Users\parukala\Dita Parity AI\migration_assistant\output\runs\20260610_170353_bbae5a\outputs\Add_a_custom_call-to-action_to_your_LinkedIn_Page.dita
+
+------------------------------------------------------------------------
+APPLIED  (auto-patched into output/)
+------------------------------------------------------------------------
+[APPLIED #1]
+  operation:   REPLACE
+  topic file:  Add_a_custom_call-to-action_to_your_LinkedIn_Page.dita
+  xpath:       /concept/title[1]
+  old text:    'Add a custom call-to-action to your LinkedIn Page'
+  new text:    'Add a custom call-to-action button to your LinkedIn Page'
+
+[APPLIED #2]
+  operation:   DELETE
+  topic file:  Add_a_custom_call-to-action_to_your_LinkedIn_Page.dita
+  xpath:       /concept/conbody[1]/p[2]
+  old text:    'Drive prospective clients to take action with a Custom Buttonâ-¶Drive prospective clients to take action with a Custom Button'
+
+------------------------------------------------------------------------
+SKIPPED  (auto-patch refused for safety / structural reasons)
+------------------------------------------------------------------------
+[SKIPPED #1]
+  operation:   INSERT
+  anchor:      after <ditamap>::<topichead navtitle='Desktop'>
+  new text:    'Mobile'
+  reason:      this heading lives in the .ditamap (<topichead>/<topicgroup>/<navtitle>), not in a topic body; edit the map directly
+
+[SKIPPED #2]
+  operation:   DELETE
+  topic file:  <ditamap>
+  xpath:       <topichead navtitle='Mobile'>
+  old text:    'Mobile'
+  reason:      this heading lives in the .ditamap (<topichead>/<topicgroup>/<navtitle>), not in a topic body; edit the map directly
+
+[SKIPPED #3]
+  operation:   REPLACE
+  topic file:  Desktop.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[3]/cmd[1]
+  old text:    'Turn on the Custom button toggle.'
+  new text:    'In the Buttons tab, turn on the Custom button toggle.'
+  reason:      source element contains inline markup (<xref>/<uicontrol>/<keyword> etc.) that the article's plain-text update would discard; review manually to decide what to keep
+
+[SKIPPED #4]
+  operation:   REPLACE
+  topic file:  Mobile.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[3]/cmd[1]
+  old text:    'Turn on the Custom button toggle.'
+  new text:    'In the Buttons tab, turn on the Custom button toggle.'
+  reason:      source element contains inline markup (<xref>/<uicontrol>/<keyword> etc.) that the article's plain-text update would discard; review manually to decide what to keep
+
+------------------------------------------------------------------------
+DETECTED  (change found but op kind not yet auto-applied)
+------------------------------------------------------------------------
+[DETECTED #1]
+  operation:   REPLACE
+  topic file:  Desktop.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[3]/cmd[1]
+  old text:    'Turn on the Custom button toggle.'
+  new text:    'In the Buttons tab, turn on the Custom button toggle.'
+  reason:      the original REPLACE was refused for safety reasons (see the SKIPPED entry above); the new article text is surfaced here so it isn't lost — place it manually near Desktop.dita::/task/taskbody[1]/steps[1]/step[3]/cmd[1]
+
+[DETECTED #2]
+  operation:   REPLACE
+  topic file:  Mobile.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[3]/cmd[1]
+  old text:    'Turn on the Custom button toggle.'
+  new text:    'In the Buttons tab, turn on the Custom button toggle.'
+  reason:      the original REPLACE was refused for safety reasons (see the SKIPPED entry above); the new article text is surfaced here so it isn't lost — place it manually near Mobile.dita::/task/taskbody[1]/steps[1]/step[3]/cmd[1]
+
+------------------------------------------------------------------------
+MAP EDITS  (content belongs in the .ditamap reltable, not topic bodies)
+------------------------------------------------------------------------
+[MAP EDIT #1]
+  operation:   INSERT
+  anchor:      after Results.dita::/concept/conbody[1]/p[1]
+  new text:    'Related tasks'
+  reason:      Review the <reltable> in your .ditamap. The article has a Learn more / Related tasks section; make sure the corresponding <relcell> entries match.
+
+------------------------------------------------------------------------
+SCHEMATRON VALIDATION
+------------------------------------------------------------------------
+Ran against kms_global_rules.sch: 2 issues (2 error, 0 warning, 0 info)
+
+[VALIDATION #1]
+  rule:        IM_shortdesc02
+  severity:    ERROR
+  topic file:  Add_a_custom_call-to-action_to_your_LinkedIn_Page.dita
+  location:    /concept
+  message:     IM_shortdesc02: A short description is strongly recommended.
+
+[VALIDATION #2]
+  rule:        IM_note09
+  severity:    ERROR
+  topic file:  Add_a_custom_call-to-action_to_your_LinkedIn_Page.dita
+  location:    /concept/conbody/note[2]
+  message:     IM_note09: The <note> element must have 225 characters or fewer.
+

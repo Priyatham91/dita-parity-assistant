@@ -1,0 +1,148 @@
+========================================================================
+DITA PARITY PATCH REPORT
+========================================================================
+Total ops processed:    12
+Applied:                10
+Skipped (safety):       2
+Detected (manual):      0
+Map edits (reltable):   0
+Applied with warnings:  4
+Files written:          5
+  - C:\Users\parukala\Dita Parity AI\migration_assistant\dist\output\runs\20260612_104609_121476\outputs\Premium_partner_benefits_FAQ.dita
+  - C:\Users\parukala\Dita Parity AI\migration_assistant\dist\output\runs\20260612_104609_121476\outputs\How_can_I_access_free_trials_offered_for.dita
+  - C:\Users\parukala\Dita Parity AI\migration_assistant\dist\output\runs\20260612_104609_121476\outputs\Do_I_need_to_pay_an_additional_amount_to_access_th.dita
+  - C:\Users\parukala\Dita Parity AI\migration_assistant\dist\output\runs\20260612_104609_121476\outputs\Can_I_share_these_benefits_free_trial_with_others.dita
+  - C:\Users\parukala\Dita Parity AI\migration_assistant\dist\output\runs\20260612_104609_121476\outputs\What_if_I_am_already_a_Premium_subscriber.dita
+
+------------------------------------------------------------------------
+APPLIED  (auto-patched into output/)
+------------------------------------------------------------------------
+[APPLIED #1]
+  operation:   REPLACE
+  topic file:  Premium_partner_benefits_FAQ.dita
+  xpath:       /concept/conbody[1]/note[1]
+  old text:    'We are rolling out these benefits for a limited time to paying Premium members in select regions. These benefits cannot be redeemed on iOS devices. If you are using an iOS device, use a desktop to redeem your perks, regardless of where you purchased your subscription.'
+  new text:    'Premium Perks and partner benefits are available to paying Premium subscribers in select regions. Partner Perks are available for a limited time and/or while supplies last. These benefits cannot be redeemed on iOS devices. If you are using an iOS device, please use a desktop to redeem your perks, regardless of where you purchased your subscription. Additional restrictions may apply and may be set by each partner. If you receive a notice of ineligibility on a partner’s site, please contact the partner directly for assistance.'
+  warning:     <note> body was rewritten as <p> children from the article text. Verify the new note still reads correctly and that paragraph breaks (if any) landed where you expect.
+
+[APPLIED #2]
+  operation:   INSERT
+  anchor:      after Premium_partner_benefits_FAQ.dita::/concept/conbody[1]/table[1]/tgroup[1]/tbody[1]/row[12]
+  new text:    'Loveable One year 300 one-time credits (available for Premium members except subscribers of Premium Company pages)'
+  warning:     new <row> inserted; bold cell text wrapped in <em>. If your existing rows wrap the label cell in <uicontrol>, swap <em> for <uicontrol> manually.
+
+[APPLIED #3]
+  operation:   INSERT
+  anchor:      after Premium_partner_benefits_FAQ.dita::/concept/conbody[1]/table[1]/tgroup[1]/tbody[1]/row[12]
+  new text:    'LegalZoom 25% off the full LegalZoom product suite (available exclusively to Premium members in the United States)'
+  warning:     new <row> inserted; bold cell text wrapped in <em>. If your existing rows wrap the label cell in <uicontrol>, swap <em> for <uicontrol> manually.
+
+[APPLIED #4]
+  operation:   INSERT
+  anchor:      after Premium_partner_benefits_FAQ.dita::/concept/conbody[1]/table[1]/tgroup[1]/tbody[1]/row[12]
+  new text:    'YouTube Premium Three Months Free trial of YouTube Premium (available only in United States, Brazil, Canada, Argentina, Mexico, United Kingdom, France, Germany, Turkey, Netherlands, Italy, United Arab Emirates, Switzerland, Spain, Sweden, South Africa, Denmark, Poland, Belgium, India, Australia, Indonesia, and Hong Kong.)'
+  warning:     new <row> inserted; bold cell text wrapped in <em>. If your existing rows wrap the label cell in <uicontrol>, swap <em> for <uicontrol> manually.
+
+[APPLIED #5]
+  operation:   REPLACE
+  topic file:  How_can_I_access_free_trials_offered_for.dita
+  xpath:       /concept/title[1]
+  old text:    'How can I access free trials offered for?'
+  new text:    'How can I access Premium perks?'
+
+[APPLIED #6]
+  operation:   REPLACE
+  topic file:  How_can_I_access_free_trials_offered_for.dita
+  xpath:       /concept/conbody[1]/p[1]
+  old text:    'On upgrading or subscribing to a LinkedIn Premium account, you will receive detailed instructions via email on how to redeem these exclusive offers. Please make sure you are subscribed to LinkedIn marketing emails. If you are eligible for Premium free trial, you will be eligible to redeem this offer after your free trial ends and you start paying for your Premium subscription.'
+  new text:    'After you subscribe to LinkedIn Premium, you will receive an email with detailed instructions on how to redeem these exclusive offers. Please ensure you are subscribed to LinkedIn marketing emails. If you are eligible for a Premium free trial, you will only be eligible to redeem Premium Perks and/or offers after your free trial ends and you make your first Premium subscription payment.'
+
+[APPLIED #7]
+  operation:   REPLACE
+  topic file:  Do_I_need_to_pay_an_additional_amount_to_access_th.dita
+  xpath:       /concept/conbody[1]/p[1]
+  old text:    'No, these benefits are complimentary with your LinkedIn Premium subscription. However, please note that after the free trial periods, standard subscription rates will apply for the partner services unless canceled. Also complimentary subscriptions are not related to your LinkedIn subscription and are subject to their own renewal guidelines.'
+  new text:    'No, these benefits are included with your LinkedIn Premium subscription. However, after any free trial periods, standard subscription rates may apply unless canceled per the terms set forth by the partner offering the benefit or perk. Please note that complimentary partner subscriptions are separate from your LinkedIn subscription and are subject to their own renewal terms.'
+
+[APPLIED #8]
+  operation:   REPLACE
+  topic file:  Can_I_share_these_benefits_free_trial_with_others.dita
+  xpath:       /concept/title[1]
+  old text:    'Can I share these benefits/free trial with others?'
+  new text:    'Can I share these benefits with others?'
+
+[APPLIED #9]
+  operation:   REPLACE
+  topic file:  Can_I_share_these_benefits_free_trial_with_others.dita
+  xpath:       /concept/conbody[1]/p[1]
+  old text:    'These exclusive benefits are intended for the personal use of the LinkedIn Premium account holder only. The unique codes are single use.'
+  new text:    'These exclusive benefits are intended for the primary LinkedIn Premium account holder. The unique codes are single use.'
+
+[APPLIED #10]
+  operation:   INSERT
+  anchor:      after What_if_I_am_already_a_Premium_subscriber.dita::/concept/title[1]
+  new text:    'Premium Perks and partner benefits are available to Premium subscribers in select regions. You can view available Premium Perks here.'
+
+------------------------------------------------------------------------
+SKIPPED  (auto-patch refused for safety / structural reasons)
+------------------------------------------------------------------------
+[SKIPPED #1]
+  operation:   DELETE
+  topic file:  Premium_partner_benefits_FAQ.dita
+  xpath:       /concept/conbody[1]/table[1]/tgroup[1]/tbody[1]/row[6]
+  old text:    'Masterclass Annual 30% off on the annual pricing (English users only)'
+  reason:      structural element <row> — diff alignment is unreliable for multi-child blocks; review manually
+
+[SKIPPED #2]
+  operation:   INSERT
+  anchor:      after Premium_partner_benefits_FAQ.dita::/concept/conbody[1]/table[1]/tgroup[1]/tbody[1]/row[12]
+  new text:    'Achieve your personal and professional goals with LinkedIn Premium Perks.\n\n\n\n\n\n\n\nAccess Premium partner benefits'
+  reason:      row INSERT detected but the article parser captured no cell data; cannot build a structurally valid <row>.
+
+------------------------------------------------------------------------
+SCHEMATRON VALIDATION
+------------------------------------------------------------------------
+Ran against kms_global_rules.sch: 6 issues (6 error, 0 warning, 0 info)
+
+[VALIDATION #1]
+  rule:        IM_shortdesc02
+  severity:    ERROR
+  topic file:  Premium_partner_benefits_FAQ.dita
+  location:    /concept
+  message:     IM_shortdesc02: A short description is strongly recommended.
+
+[VALIDATION #2]
+  rule:        IM_note09
+  severity:    ERROR
+  topic file:  Premium_partner_benefits_FAQ.dita
+  location:    /concept/conbody/note[1]
+  message:     IM_note09: The <note> element must have 225 characters or fewer.
+
+[VALIDATION #3]
+  rule:        IM_shortdesc02
+  severity:    ERROR
+  topic file:  How_can_I_access_free_trials_offered_for.dita
+  location:    /concept
+  message:     IM_shortdesc02: A short description is strongly recommended.
+
+[VALIDATION #4]
+  rule:        IM_shortdesc02
+  severity:    ERROR
+  topic file:  Do_I_need_to_pay_an_additional_amount_to_access_th.dita
+  location:    /concept
+  message:     IM_shortdesc02: A short description is strongly recommended.
+
+[VALIDATION #5]
+  rule:        IM_shortdesc02
+  severity:    ERROR
+  topic file:  Can_I_share_these_benefits_free_trial_with_others.dita
+  location:    /concept
+  message:     IM_shortdesc02: A short description is strongly recommended.
+
+[VALIDATION #6]
+  rule:        IM_shortdesc02
+  severity:    ERROR
+  topic file:  What_if_I_am_already_a_Premium_subscriber.dita
+  location:    /concept
+  message:     IM_shortdesc02: A short description is strongly recommended.
+

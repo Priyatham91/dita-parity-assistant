@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# PyInstaller build artifacts
+build/
+*.spec.bak
+
+# Bundled exe and its scratch output, but KEEP the test fixture runs
+dist/*
+!dist/output/
+dist/output/*
+!dist/output/runs/
+dist/output/runs/*
+!dist/output/runs/20260611_132030_9f92e8/
+!dist/output/runs/20260612_104609_121476/
+
+# Top-level scratch dirs, but KEEP the test fixture runs under output/runs/
+output/*
+!output/runs/
+output/runs/*
+!output/runs/20260610_145635_0180db/
+!output/runs/20260610_164146_271390/
+!output/runs/20260610_170353_bbae5a/
+
+input/
+*.log
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Secrets / local config
+.env
+.env.local
+*.key
+*.pem

@@ -1,0 +1,4 @@
+# Runtime dependency.
+# Only used by app/schematron_validator.py — the tool runs without it
+# (Schematron validation becomes a no-op when lxml is unavailable).
+lxml>=4.9

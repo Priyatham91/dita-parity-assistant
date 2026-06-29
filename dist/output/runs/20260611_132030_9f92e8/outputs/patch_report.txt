@@ -1,0 +1,142 @@
+========================================================================
+DITA PARITY PATCH REPORT
+========================================================================
+Total ops processed:    15
+Applied:                1
+Skipped (safety):       6
+Detected (manual):      7
+Map edits (reltable):   1
+Applied with warnings:  1
+Files written:          1
+  - C:\Users\parukala\Dita Parity AI\migration_assistant\dist\output\runs\20260611_132030_9f92e8\outputs\Mobile.dita
+
+------------------------------------------------------------------------
+APPLIED  (auto-patched into output/)
+------------------------------------------------------------------------
+[APPLIED #1]
+  operation:   INSERT
+  anchor:      after Mobile.dita::/task/taskbody[1]/steps[1]/step[5]/info[1]/dl[1]/dlentry[2]
+  new text:    'Email: Delivered to your primary email address.'
+  warning:     inserted as a new <dlentry> (term: "Email"); per IM page 123 the <dt> must be a short noun phrase with no trailing colon — verify the term is short enough and that the description belongs in <dd>.
+
+------------------------------------------------------------------------
+SKIPPED  (auto-patch refused for safety / structural reasons)
+------------------------------------------------------------------------
+[SKIPPED #1]
+  operation:   INSERT
+  anchor:      after <ditamap>::<topichead navtitle='Desktop'>
+  new text:    'Mobile'
+  reason:      this heading lives in the .ditamap (<topichead>/<topicgroup>/<navtitle>), not in a topic body; edit the map directly
+
+[SKIPPED #2]
+  operation:   REPLACE
+  topic file:  Desktop.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[5]/info[1]/dl[1]/dlentry[1]
+  old text:    'In-app notificationsDelivered within the LinkedIn app.'
+  new text:    'In-app notifications: Delivered within the LinkedIn app.'
+  reason:      structural element <dlentry> — diff alignment is unreliable for multi-child blocks; review manually
+
+[SKIPPED #3]
+  operation:   REPLACE
+  topic file:  <ditamap>
+  xpath:       <topichead navtitle='Mobile'>
+  old text:    'Mobile'
+  new text:    'Push notifications: Sent to your device immediately.'
+  reason:      this heading lives in the .ditamap (<topichead>/<topicgroup>/<navtitle>), not in a topic body; edit the map directly
+
+[SKIPPED #4]
+  operation:   INSERT
+  anchor:      after <ditamap>::<topichead navtitle='Mobile'>
+  new text:    'Email: Delivered to your primary email address.'
+  reason:      this heading lives in the .ditamap (<topichead>/<topicgroup>/<navtitle>), not in a topic body; edit the map directly
+
+[SKIPPED #5]
+  operation:   REPLACE
+  topic file:  Mobile.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[5]/info[1]/dl[1]/dlentry[1]
+  old text:    'In-app notificationsDelivered within the LinkedIn app.'
+  new text:    'In-app notifications: Delivered within the LinkedIn app.'
+  reason:      structural element <dlentry> — diff alignment is unreliable for multi-child blocks; review manually
+
+[SKIPPED #6]
+  operation:   REPLACE
+  topic file:  Mobile.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[5]/info[1]/dl[1]/dlentry[2]
+  old text:    'Push notificationsSent to your device immediately.'
+  new text:    'Push notifications: Sent to your device immediately.'
+  reason:      structural element <dlentry> — diff alignment is unreliable for multi-child blocks; review manually
+
+------------------------------------------------------------------------
+DETECTED  (change found but op kind not yet auto-applied)
+------------------------------------------------------------------------
+[DETECTED #1]
+  operation:   REPLACE
+  topic file:  Desktop.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[5]/info[1]/dl[1]/dlentry[1]
+  old text:    'In-app notificationsDelivered within the LinkedIn app.'
+  new text:    'In-app notifications: Delivered within the LinkedIn app.'
+  reason:      the original REPLACE was refused for safety reasons (see the SKIPPED entry above); the new article text is surfaced here so it isn't lost — place it manually near Desktop.dita::/task/taskbody[1]/steps[1]/step[5]/info[1]/dl[1]/dlentry[1]
+
+[DETECTED #2]
+  operation:   REPLACE
+  topic file:  <ditamap>
+  xpath:       <topichead navtitle='Mobile'>
+  old text:    'Mobile'
+  new text:    'Push notifications: Sent to your device immediately.'
+  reason:      the original REPLACE was refused for safety reasons (see the SKIPPED entry above); the new article text is surfaced here so it isn't lost — place it manually near <ditamap>::<topichead navtitle='Mobile'>
+
+[DETECTED #3]
+  operation:   REPLACE
+  topic file:  Mobile.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[5]/info[1]/dl[1]/dlentry[1]
+  old text:    'In-app notificationsDelivered within the LinkedIn app.'
+  new text:    'In-app notifications: Delivered within the LinkedIn app.'
+  reason:      the original REPLACE was refused for safety reasons (see the SKIPPED entry above); the new article text is surfaced here so it isn't lost — place it manually near Mobile.dita::/task/taskbody[1]/steps[1]/step[5]/info[1]/dl[1]/dlentry[1]
+
+[DETECTED #4]
+  operation:   REPLACE
+  topic file:  Mobile.dita
+  xpath:       /task/taskbody[1]/steps[1]/step[5]/info[1]/dl[1]/dlentry[2]
+  old text:    'Push notificationsSent to your device immediately.'
+  new text:    'Push notifications: Sent to your device immediately.'
+  reason:      the original REPLACE was refused for safety reasons (see the SKIPPED entry above); the new article text is surfaced here so it isn't lost — place it manually near Mobile.dita::/task/taskbody[1]/steps[1]/step[5]/info[1]/dl[1]/dlentry[2]
+
+[DETECTED #5]
+  operation:   INSERT
+  anchor:      after Mobile.dita::/task/taskbody[1]/steps[1]/step[5]/info[1]/dl[1]/dlentry[2]
+  new text:    'Related task'
+  reason:      cross-tab routing refused: the article block lives in 'outside any tab' but the target topic 'Mobile.dita' corresponds to 'panel-2-ql4qj'. Place this change in the correct tab's topic manually.
+
+[DETECTED #6]
+  operation:   INSERT
+  anchor:      after Mobile.dita::/task/taskbody[1]/steps[1]/step[5]/info[1]/dl[1]/dlentry[2]
+  new text:    'Download the LinkedIn mobile app'
+  reason:      cross-tab routing refused: the article block lives in 'outside any tab' but the target topic 'Mobile.dita' corresponds to 'panel-2-ql4qj'. Place this change in the correct tab's topic manually.
+
+[DETECTED #7]
+  operation:   INSERT
+  anchor:      after Mobile.dita::/task/taskbody[1]/steps[1]/step[5]/info[1]/dl[1]/dlentry[2]
+  new text:    'How to repost on LinkedIn'
+  reason:      cross-tab routing refused: the article block lives in 'outside any tab' but the target topic 'Mobile.dita' corresponds to 'panel-2-ql4qj'. Place this change in the correct tab's topic manually.
+
+------------------------------------------------------------------------
+MAP EDITS  (content belongs in the .ditamap reltable, not topic bodies)
+------------------------------------------------------------------------
+[MAP EDIT #1]
+  operation:   INSERT
+  anchor:      after Mobile.dita::/task/taskbody[1]/steps[1]/step[5]/info[1]/dl[1]/dlentry[2]
+  new text:    'Learn more'
+  reason:      Review the <reltable> in your .ditamap. The article has a Learn more section; make sure the corresponding <relcell> entries match.
+
+------------------------------------------------------------------------
+SCHEMATRON VALIDATION
+------------------------------------------------------------------------
+Ran against kms_global_rules.sch: 1 issues (1 error, 0 warning, 0 info)
+
+[VALIDATION #1]
+  rule:        IM_shortdesc02
+  severity:    ERROR
+  topic file:  Mobile.dita
+  location:    /task
+  message:     IM_shortdesc02: A short description is strongly recommended.
+
